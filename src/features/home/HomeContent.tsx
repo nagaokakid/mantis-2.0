@@ -1,4 +1,4 @@
-import {MenuItemContext} from './MenuItemContext';
+import {MenuItemContext} from '../../contexts/MenuItemContext';
 import HomeMenu from './HomeMenu';
 import {useState, useContext} from 'react';
 import Dashboard from './Dashboard';

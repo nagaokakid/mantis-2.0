@@ -7,7 +7,7 @@ import {faUser as profileIcon,
   faCalendarDays as scheduleIcon,
   faRightFromBracket as signoutIcon} 
   from '@fortawesome/free-solid-svg-icons';
-import {MenuItemContext} from './MenuItemContext';
+import {MenuItemContext} from '../../contexts/MenuItemContext';
 
 const HomeMenu = () => {
 
