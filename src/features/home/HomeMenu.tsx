@@ -26,8 +26,8 @@ const HomeMenu = () => {
 
   return (
     
-    <div className="flex flex-col justify-between min-w-fit h-screen">
-      <ul className="menu-vertical bg-base-200 px-4 pt-4 space-y-4 flex flex-col flex-grow text-md">
+    <div className="flex flex-grow flex-col max-w-fit">
+      <ul className="menu-vertical flex-grow bg-base-200 px-4 pt-4 space-y-4 text-md">
         <li className={`flex hover:cursor-pointer ${getSelectedIcon("Dashboard")}`} onClick={() => handleIconClick("Dashboard")}>
           <div className="space-x-2 px-2 py-2">
             <FontAwesomeIcon icon={dashboardIcon} />
@@ -58,15 +58,14 @@ const HomeMenu = () => {
             <a>Profile</a>
           </div>
         </li>
-      </ul>
-      <ul className="menu-vertical bg-base-200 px-4 pt-4 space-y-4 flex flex-col flex-grow text-md">
-        <li className={`flex mt-auto my-4 hover:cursor-pointer ${getSelectedIcon("Logout")}`} onClick={() => handleIconClick("Logout")}>
+        <li className={`flex hover:cursor-pointer ${getSelectedIcon("Logout")}`} onClick={() => handleIconClick("Logout")}>
         <div className="space-x-2 px-2 py-2">
             <a className="mr-2">Sign Out</a>
             <FontAwesomeIcon icon={signoutIcon}/>
           </div>
           </li>
       </ul>
+      
     </div>
   )
 }

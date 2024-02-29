@@ -1,20 +1,28 @@
 import {MenuItemContext} from '../../contexts/MenuItemContext';
 import HomeMenu from './HomeMenu';
 import {useState, useContext} from 'react';
-import Dashboard from './Dashboard';
+import Dashboard from '../dashboard/Dashboard';
+import NavBar from '../navbar/NavBar';
 
 
 const HomeContent: React.FC = () => {
   const [selectedItem, setSelectedItem] = useState("Dashboard");
 
   return (
-    <div className="flex max-w-screen overflow-x-hidden">
-    <MenuItemContext.Provider value={{selectedItem, setSelectedItem}}>
-      <HomeMenu></HomeMenu>
-      <div className="mx-4 my-2">
-      {selectedItem === "Dashboard" && <Dashboard/>}
-      {selectedItem === "Projects"}
-      </div>
+    <div className="flex flex-col sticky h-screen">
+      <MenuItemContext.Provider value={{selectedItem, setSelectedItem}}>
+        
+        <NavBar></NavBar>
+
+        <div className="flex flex-grow">
+          <HomeMenu></HomeMenu>
+          <div className="flex-1 my-4 mx-4">
+            {selectedItem === "Dashboard" && <Dashboard/>}
+            {selectedItem === "Projects"}
+          </div>
+
+        </div>
+      
     </MenuItemContext.Provider>
     </div>
   )
