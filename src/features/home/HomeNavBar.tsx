@@ -1,6 +1,6 @@
 import LogoImage from "../../assets/mantis_logo.png"
 
-const NavBar = () => {
+const HomeNavBar = () => {
 
   return (
     <div>
@@ -8,11 +8,11 @@ const NavBar = () => {
     <div className="navbar flex bg-green-600 w-full items-center justify-between h-fit">
       <div className="flex justify-start">
         <img src={LogoImage} className="w-10 h-auto" alt="Mantis Logo" />
-        <a className="text-3xl text-white font-mono font-thin ml-2">MANTIS</a>
+        <a className="text-2xl text-white font-mono font-thin ml-2">MANTIS</a>
       </div>
       
         <div className="form-control">
-          <input type="text" placeholder="Search" className="input input-bordered w-24 md:w-auto" />
+          <input type="text" placeholder="Search" className="input input-bordered w-24 h-10 md:w-auto" />
         </div>
     </div>
 
@@ -20,4 +20,4 @@ const NavBar = () => {
   )
 }
 
-export default NavBar
+export default HomeNavBar

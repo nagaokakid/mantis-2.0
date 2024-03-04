@@ -1,30 +1,52 @@
 import {MenuItemContext} from '../../contexts/MenuItemContext';
 import HomeMenu from './HomeMenu';
-import {useState, useContext} from 'react';
+import {useState} from 'react';
 import Dashboard from '../dashboard/Dashboard';
-import NavBar from '../navbar/NavBar';
+import HomeNavBar from './HomeNavBar';
 
 
 const HomeContent: React.FC = () => {
   const [selectedItem, setSelectedItem] = useState("Dashboard");
 
   return (
-    <div className="flex flex-col sticky h-screen">
-      <MenuItemContext.Provider value={{selectedItem, setSelectedItem}}>
-        
-        <NavBar></NavBar>
 
-        <div className="flex flex-grow">
-          <HomeMenu></HomeMenu>
-          <div className="flex-1 my-4 mx-4">
-            {selectedItem === "Dashboard" && <Dashboard/>}
-            {selectedItem === "Projects"}
-          </div>
+    <MenuItemContext.Provider value={{selectedItem, setSelectedItem}}>
 
+      <div className="flex flex-col">
+
+        <div className="sticky top-0 left-0 z-50 w-full">
+          <HomeNavBar></HomeNavBar>
         </div>
-      
+
+        <div className="w-full">
+          <div className="fixed flex-none min-w-fit h-screen">
+            <HomeMenu></HomeMenu>
+          </div>
+          <div className="flex-1 flex-wrap ml-44 mr-6 my-4 break-words">
+            <Dashboard/>
+          </div>
+          
+        </div>
+
+      </div>
+
+      {/* <div className="fixed flex flex-col top-0 left-0 h-screen w-screen">
+       
+        <div className="flex-none">
+          <NavBar></NavBar>
+        </div>
+
+        <div className="flex min-h-full">
+          <div className="flex-none min-w-fit">
+            <HomeMenu></HomeMenu>
+          </div>
+          <div className="flex-1 flex-wrap break-words max-w-full overflow-y-scroll">
+            {selectedItem === "Dashboard" && <Dashboard/>}
+          </div>
+        </div>
+
+      </div> */}
     </MenuItemContext.Provider>
-    </div>
   )
 }
 

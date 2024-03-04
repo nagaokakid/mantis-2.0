@@ -2,7 +2,31 @@ import React from 'react'
 
 const Dashboard = () => {
   return (
-    <div> <h1>dasasfadf</h1></div>
+    <div className="">
+      <h1>fsdfasdfsdfsdafsadfsdafsadfsdadasasfadffsdfsdfdSDFDSFDSGGGGGaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbbbcccc</h1>
+      <h1 className="text-4xl">
+        123
+        <p>123</p>
+        <p>123</p>
+        <p>123</p>
+        <p>123</p>
+        <p>123</p>
+        <p>123</p>
+        <p>123</p>
+        <p>123</p>
+        <p>123</p>
+        <p>123</p>
+        <p>123</p>
+        <p>123</p>
+        <p>123</p>
+        <p>123</p>
+        <p>123</p>
+        <p>1234</p>
+        <p>1234</p>
+
+        
+      </h1>
+      </div>
    
   )
 }
