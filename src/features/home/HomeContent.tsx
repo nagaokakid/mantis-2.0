@@ -12,40 +12,17 @@ const HomeContent: React.FC = () => {
 
     <MenuItemContext.Provider value={{selectedItem, setSelectedItem}}>
 
-      <div className="flex flex-col">
+      <div className="flex flex-col max-w-{100%}">
 
-        <div className="sticky top-0 left-0 z-50 w-full">
+        <div className="sticky top-0 left-0 z-50 min-w-fit">
           <HomeNavBar></HomeNavBar>
         </div>
 
-        <div className="w-full">
-          <div className="fixed flex-none min-w-fit h-screen">
-            <HomeMenu></HomeMenu>
-          </div>
-          <div className="flex-1 flex-wrap ml-44 mr-6 my-4 break-words">
-            <Dashboard/>
-          </div>
-          
+        <div className="w-full break-words">
+            {selectedItem === "Dashboard" && <Dashboard/>}
         </div>
 
       </div>
-
-      {/* <div className="fixed flex flex-col top-0 left-0 h-screen w-screen">
-       
-        <div className="flex-none">
-          <NavBar></NavBar>
-        </div>
-
-        <div className="flex min-h-full">
-          <div className="flex-none min-w-fit">
-            <HomeMenu></HomeMenu>
-          </div>
-          <div className="flex-1 flex-wrap break-words max-w-full overflow-y-scroll">
-            {selectedItem === "Dashboard" && <Dashboard/>}
-          </div>
-        </div>
-
-      </div> */}
     </MenuItemContext.Provider>
   )
 }
