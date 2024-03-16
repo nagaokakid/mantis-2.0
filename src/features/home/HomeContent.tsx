@@ -12,9 +12,9 @@ const HomeContent: React.FC = () => {
 
     <MenuItemContext.Provider value={{selectedItem, setSelectedItem}}>
 
-      <div className="flex flex-col max-w-{100%}">
+      <div className="flex flex-col min-w-full max-w-{100%}">
 
-        <div className="sticky top-0 left-0 z-50 min-w-fit">
+        <div className="sticky top-0 left-0 min-w-fit">
           <HomeNavBar></HomeNavBar>
         </div>
 

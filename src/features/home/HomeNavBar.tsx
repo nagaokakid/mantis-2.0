@@ -39,30 +39,29 @@ const HomeNavBar = () => {
   };
 
   return (
-  
+    <div className="navbar min-w-full bg-neutral-200 p-0">
+      <div className="flex justify-between items-center px-4">
+        <div className="flex items-center pr-12">
+          <img src={LogoImage} className="w-10" alt="Mantis Logo" />
+          <div><a className="text-xl text-emerald-600 font-mono font-bold ml-2">MANTIS</a></div>
+          
+        </div>
 
-    <div className="navbar bg-neutral-200 min-w-fit h-fit space-x-8">
-      
-      <div className="flex-shrink-0">
-        <img src={LogoImage} className="w-10 h-auto" alt="Mantis Logo" />
-        <a className="text-xl text-emerald-600 font-mono font-bold ml-2">MANTIS</a>
+        <div className="flex form-control">
+          <input type="search" placeholder="Search" className="flex input input-bordered h-10" />
+        </div>
       </div>
 
-      <div className="flex form-control">
-        <input type="search" placeholder="Search" className="flex input input-bordered h-10 mr-2" />
+      <div className="flex justify-end items-center px-4">
+        <div className="flex items-center space-x-8">
+          <MenuItem label="Dashboard" iconName={dashboardIcon} onClick={() => { handleIconClick("Dashboard") }} selected={selectedItem === "Dashboard"} />
+          <MenuItem label="Projects" iconName={projectIcon} onClick={() => { handleIconClick("Projects") }} selected={selectedItem === "Projects"} />
+          <MenuItem label="Tickets" iconName={ticketIcon} onClick={() => { handleIconClick("Tickets") }} selected={selectedItem === "Tickets"} />
+          <MenuItem label="Schedule" iconName={scheduleIcon} onClick={() => { handleIconClick("Schedule") }} selected={selectedItem === "Schedule"} />
+        </div>
       </div>
-
-      <div className="flex items-center space-x-8">
-            <MenuItem label="Dashboard" iconName={dashboardIcon} onClick={() => {handleIconClick("Dashboard")}} selected={selectedItem === "Dashboard"}/>
-            <MenuItem label="Projects" iconName={projectIcon} onClick={() => {handleIconClick("Projects")}} selected={selectedItem === "Projects"}/>
-            <MenuItem label="Tickets" iconName={ticketIcon} onClick={() => {handleIconClick("Tickets")}} selected={selectedItem === "Tickets"}/>
-            <MenuItem label="Schedule" iconName={scheduleIcon} onClick={() => {handleIconClick("Schedule")}} selected={selectedItem === "Schedule"}/>
-      </div>
-      
     </div>
-
-    
-  )
+  );
 
 }
 
