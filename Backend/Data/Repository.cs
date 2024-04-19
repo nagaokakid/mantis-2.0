@@ -13,9 +13,9 @@ namespace Backend.Data
         Task<TEntity> GetById(string id);
         Task<TEntity> Create(TEntity entity);
         Task<TEntity> Update(TEntity entity);
-        Task<TEntity> Delete(string id);
+        Task<bool> Delete(string id);
 
-    }
+    } 
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
         private readonly AppDbContext _appDbContext;
@@ -85,7 +85,7 @@ namespace Backend.Data
 
         }
 
-        public async Task<TEntity> Delete(string id)
+        public async Task<bool> Delete(string id)
         {
             try
             {
@@ -93,11 +93,12 @@ namespace Backend.Data
 
                 if (entity != null)
                 {
-                    var entityEntry = _appDbContext.Remove<TEntity>(entity);
+                    _appDbContext.Remove<TEntity>(entity);
                     await _appDbContext.SaveChangesAsync();
+                    return true;    // delete operation successful
                 }
 
-                return entity;
+                return false;   // delete operation failed
             }
             catch (NpgsqlException ex)
             {
