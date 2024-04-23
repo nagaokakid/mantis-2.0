@@ -1,8 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Npgsql;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Npgsql;
 using Backend.Exceptions;
 
 namespace Backend.Data
