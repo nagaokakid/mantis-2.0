@@ -11,13 +11,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// Add postgreSQL database context
-builder.Services.AddSingleton<AppDbContext>();
-
-/*// Provide one context for local Postgres database, shared throughout the app
-builder.Services.AddSingleton(builder.Services.AddDbContext<AppDbContext>(options => 
-    options.UseNpgsql(builder.Configuration.GetConnectionString("WebApiDatabase")) // appsettings.json
-));*/
+// Add Postgres database context
+builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("WebApiDatabase")));
 
 var app = builder.Build();
 

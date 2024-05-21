@@ -6,11 +6,15 @@ namespace Backend.Data
 {
     public class AppDbContext : DbContext
     {
-        protected readonly IConfiguration configuration;
+        protected readonly IConfiguration ? configuration;
 
         public AppDbContext(IConfiguration configuration)
         {
             this.configuration = configuration;
+        }
+
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+        {
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

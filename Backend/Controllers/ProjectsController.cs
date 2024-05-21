@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Backend.Data;
+using Backend.Data.Model;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -6,8 +8,16 @@ namespace Backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+
     public class ProjectsController : ControllerBase
     {
+        private readonly AppDbContext _context;
+
+        public ProjectsController(AppDbContext context)
+        {
+            _context = context;
+        }
+
         // GET: api/<ProjectsController>
         [HttpGet]
         public IEnumerable<string> Get()
