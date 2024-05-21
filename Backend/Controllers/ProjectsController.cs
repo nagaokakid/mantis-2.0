@@ -11,11 +11,11 @@ namespace Backend.Controllers
 
     public class ProjectsController : ControllerBase
     {
-        private readonly AppDbContext _context;
+        private Repository<Project> _repository;
 
         public ProjectsController(AppDbContext context)
         {
-            _context = context;
+            _repository = new Repository<Project>(context);
         }
 
         // GET: api/<ProjectsController>
