@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Backend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240327005821_InitialDatabase")]
-    partial class InitialDatabase
+    [Migration("20240621030913_InitializeDB")]
+    partial class InitializeDB
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -58,7 +58,7 @@ namespace Backend.Migrations
                     b.ToTable("Comments");
                 });
 
-            modelBuilder.Entity("Backend.Data.Model.Project", b =>
+            modelBuilder.Entity("Backend.Data.Model.Projects", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("text");
@@ -82,7 +82,7 @@ namespace Backend.Migrations
                     b.ToTable("Projects");
                 });
 
-            modelBuilder.Entity("Backend.Data.Model.Ticket", b =>
+            modelBuilder.Entity("Backend.Data.Model.Tickets", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("text");
@@ -118,39 +118,6 @@ namespace Backend.Migrations
                     b.HasIndex("ProjectId");
 
                     b.ToTable("Tickets");
-                });
-
-            modelBuilder.Entity("Backend.Data.Model.User", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("boolean");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("UserName")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Backend.Data.Model.UserProjects", b =>
@@ -197,15 +164,48 @@ namespace Backend.Migrations
                     b.ToTable("UserTickets");
                 });
 
+            modelBuilder.Entity("Backend.Data.Model.Users", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
+                });
+
             modelBuilder.Entity("Backend.Data.Model.Comment", b =>
                 {
-                    b.HasOne("Backend.Data.Model.Ticket", "Ticket")
+                    b.HasOne("Backend.Data.Model.Tickets", "Ticket")
                         .WithMany()
                         .HasForeignKey("TicketId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Backend.Data.Model.User", "User")
+                    b.HasOne("Backend.Data.Model.Users", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -216,9 +216,9 @@ namespace Backend.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Backend.Data.Model.Ticket", b =>
+            modelBuilder.Entity("Backend.Data.Model.Tickets", b =>
                 {
-                    b.HasOne("Backend.Data.Model.Project", "Project")
+                    b.HasOne("Backend.Data.Model.Projects", "Project")
                         .WithMany()
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -229,13 +229,13 @@ namespace Backend.Migrations
 
             modelBuilder.Entity("Backend.Data.Model.UserProjects", b =>
                 {
-                    b.HasOne("Backend.Data.Model.Project", "Project")
+                    b.HasOne("Backend.Data.Model.Projects", "Project")
                         .WithMany()
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Backend.Data.Model.User", "User")
+                    b.HasOne("Backend.Data.Model.Users", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -248,13 +248,13 @@ namespace Backend.Migrations
 
             modelBuilder.Entity("Backend.Data.Model.UserTickets", b =>
                 {
-                    b.HasOne("Backend.Data.Model.Ticket", "Ticket")
+                    b.HasOne("Backend.Data.Model.Tickets", "Ticket")
                         .WithMany()
                         .HasForeignKey("TicketId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Backend.Data.Model.User", "User")
+                    b.HasOne("Backend.Data.Model.Users", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)

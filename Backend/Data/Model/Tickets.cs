@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Backend.Data.Model
 {
     // 1-to-M relationship btwn project and ticket table
-    public class Ticket
+    public class Tickets
     {
         [Key]
         public string Id {  get; set; }
@@ -14,7 +14,7 @@ namespace Backend.Data.Model
         public string ProjectId {  get; set; }
         
         [ForeignKey("ProjectId")]
-        public Project Project {  get; set; }
+        public Projects Project {  get; set; }
 
         [Required]
         public string Title { get; set; }

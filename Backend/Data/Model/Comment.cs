@@ -18,10 +18,10 @@ namespace Backend.Data.Model
         public string TicketId { get; set; }
 
         [ForeignKey("UserId")]
-        public User User { get; set; }
+        public Users User { get; set; }
 
         [ForeignKey("TicketId")]
-        public Ticket Ticket { get; set; }
+        public Tickets Ticket { get; set; }
 
         [Required]
         public string Text {  get; set; }

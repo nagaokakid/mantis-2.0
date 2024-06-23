@@ -5,29 +5,29 @@ namespace Backend.Services
 {
     public class ProjectService
     {
-        private readonly Repository<Project> _projectRepo;
+        private readonly Repository<Projects> _projectRepo;
 
         public ProjectService(AppDbContext appDbContext)
         {
-            _projectRepo = new Repository<Project>(appDbContext);
+            _projectRepo = new Repository<Projects>(appDbContext);
         }
 
-        public async Task<Project> GetAllProjects(string id)
+        public async Task<Projects> GetAllProjects(string id)
         {
             return await _projectRepo.GetById(id);
         }
 
-        public async Task<Project> GetProjects(string id)
+        public async Task<Projects> GetProjects(string id)
         {
             return await _projectRepo.GetById(id);
         }
 
-        public async Task<Project> CreateProject(Project newProject)
+        public async Task<Projects> CreateProject(Projects newProject)
         {
             return await _projectRepo.Create(newProject);
         }
 
-        public async Task<Project> UpdateProject(Project updatedProject)
+        public async Task<Projects> UpdateProject(Projects updatedProject)
         {
             return await _projectRepo.Update(updatedProject);
         }

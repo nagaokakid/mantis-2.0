@@ -16,9 +16,9 @@ namespace Backend.Data.Model
         public string ProjectId {  get; set; }
 
         [ForeignKey("UserId")]
-        public User User { get; set; }
+        public Users User { get; set; }
 
         [ForeignKey("ProjectId")]
-        public Project Project {  get; set; }
+        public Projects Project {  get; set; }
     }
 }

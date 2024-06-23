@@ -5,31 +5,31 @@ namespace Backend.Services
 {
     public class UserService
     {
-        private readonly Repository<User> _userRepo;
+        private readonly Repository<Users> _userRepo;
         private readonly Repository<UserProjects> _userProjectsRepo;
         private readonly Repository<UserTickets> _userTicketsRepo;
-        private readonly Repository<Project> _projectRepo;
+        private readonly Repository<Projects> _projectRepo;
 
         public UserService(AppDbContext appDbContext) 
         {
-            _userRepo = new Repository<User>(appDbContext);
+            _userRepo = new Repository<Users>(appDbContext);
             _userProjectsRepo = new Repository<UserProjects>(appDbContext);
-            _projectRepo = new Repository<Project>(appDbContext);
+            _projectRepo = new Repository<Projects>(appDbContext);
             _userTicketsRepo = new Repository<UserTickets>(appDbContext);
         }
 
         // Retrieve a single user
-        public async Task<User> GetUser(string id)
+        public async Task<Users> GetUser(string id)
         {
             return await _userRepo.GetById(id);
         }
 
         // Retrieve all projects belonging to a single user
-        public async Task<List<Project>> GetAllUserProjects(string userId)
+        public async Task<List<Projects>> GetAllUserProjects(string userId)
         {
             var userProjectsTable = await _userProjectsRepo.GetAll();
             var userProjectsFilteredList = userProjectsTable.Where(entry => entry.UserId == userId).ToList();
-            List<Project> projects = new List<Project>();
+            List<Projects> projects = new List<Projects>();
             
             foreach (var listItem in userProjectsFilteredList)
             {
@@ -41,13 +41,13 @@ namespace Backend.Services
         }
 
         // Create a new user
-        public async Task<User> CreateUser(User newUser)
+        public async Task<Users> CreateUser(Users newUser)
         {
             return await _userRepo.Create(newUser);
         }
 
         // Update an existing user
-        public async Task<User> UpdateUser(User updatedUser)
+        public async Task<Users> UpdateUser(Users updatedUser)
         {
             return await _userRepo.Update(updatedUser);
         }

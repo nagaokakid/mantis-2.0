@@ -5,29 +5,29 @@ namespace Backend.Services
 {
     public class TicketService
     {
-        private readonly Repository<Ticket> _ticketRepo;
+        private readonly Repository<Tickets> _ticketRepo;
 
         public TicketService(AppDbContext appDbContext)
         {
-            _ticketRepo = new Repository<Ticket>(appDbContext);
+            _ticketRepo = new Repository<Tickets>(appDbContext);
         }
 
-        public async Task<Ticket> GetAllTickets(string id)
+        public async Task<Tickets> GetAllTickets(string id)
         {
             return await _ticketRepo.GetById(id);
         }
 
-        public async Task<Ticket> GetTicket(string id)
+        public async Task<Tickets> GetTicket(string id)
         {
             return await _ticketRepo.GetById(id);
         }
 
-        public async Task<Ticket> CreateTicket(Ticket newTicket)
+        public async Task<Tickets> CreateTicket(Tickets newTicket)
         {
             return await _ticketRepo.Create(newTicket);
         }
 
-        public async Task<Ticket> UpdateTicket(Ticket updatedTicket)
+        public async Task<Tickets> UpdateTicket(Tickets updatedTicket)
         {
             return await _ticketRepo.Update(updatedTicket);
         }

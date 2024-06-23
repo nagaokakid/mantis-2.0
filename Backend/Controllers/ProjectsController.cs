@@ -11,16 +11,16 @@ namespace Backend.Controllers
 
     public class ProjectsController : ControllerBase
     {
-        private Repository<Project> _repository;
+        private Repository<Projects> _repository;
 
         public ProjectsController(AppDbContext context)
         {
-            _repository = new Repository<Project>(context);
+            _repository = new Repository<Projects>(context);
         }
 
         // GET: api/projects
         [HttpGet]
-        public async Task<ActionResult<IQueryable<Project>>> Get()
+        public async Task<ActionResult<IQueryable<Projects>>> Get()
         {
             try
             {
@@ -35,7 +35,7 @@ namespace Backend.Controllers
 
         // GET api/projects/GUID
         [HttpGet("{id}")]
-        public async Task<ActionResult<Project>> Get(string id)
+        public async Task<ActionResult<Projects>> Get(string id)
         {
             try
             {
@@ -55,7 +55,7 @@ namespace Backend.Controllers
 
         // POST api/project
         [HttpPost]
-        public async Task<ActionResult<Project>> Post(Project newProject)
+        public async Task<ActionResult<Projects>> Post(Projects newProject)
         {
             try
             {
@@ -70,7 +70,7 @@ namespace Backend.Controllers
 
         // PUT api/project/GUID
         [HttpPut("{id}")]
-        public async Task<ActionResult<Project>> Put(string id, Project updatedProject)
+        public async Task<ActionResult<Projects>> Put(string id, Projects updatedProject)
         {
             try
             {
@@ -98,6 +98,7 @@ namespace Backend.Controllers
                 {
                     return NotFound("Resource with given ID could not be found.");
                 }
+                return result;
             }
             catch (Exception ex)
             {
