@@ -3,20 +3,16 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Add Postgres database context
+builder.Services.AddScoped<AppDbContext>();
 
+// Add controllers to the container
 builder.Services.AddControllers();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<AppDbContext>();
-
-/*// Provide one context for local Postgres database, shared throughout the app
-builder.Services.AddSingleton(builder.Services.AddDbContext<AppDbContext>(options => 
-    options.UseNpgsql(builder.Configuration.GetConnectionString("WebApiDatabase")) // appsettings.json
-));*/
 
 var app = builder.Build();
 

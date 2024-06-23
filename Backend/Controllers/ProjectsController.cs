@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Backend.Data;
+using Backend.Data.Model;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -6,38 +8,102 @@ namespace Backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+
     public class ProjectsController : ControllerBase
     {
-        // GET: api/<ProjectsController>
+        private Repository<Projects> _repository;
+
+        public ProjectsController(AppDbContext context)
+        {
+            _repository = new Repository<Projects>(context);
+        }
+
+        // GET: api/projects
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<ActionResult<IQueryable<Projects>>> Get()
         {
-            return new string[] { "value1", "value2" };
+            try
+            {
+                var projects = await _repository.GetAll();
+                return Ok(projects);
+            }
+            catch (Exception ex) 
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
 
-        // GET api/<ProjectsController>/5
+        // GET api/projects/GUID
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<ActionResult<Projects>> Get(string id)
         {
-            return "value";
+            try
+            {
+                var project = await _repository.GetById(id);
+                if (project == null)
+                {
+                    return NotFound();
+                }
+                return Ok(project);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+
         }
 
-        // POST api/<ProjectsController>
+        // POST api/project
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<ActionResult<Projects>> Post(Projects newProject)
         {
+            try
+            {
+                var project = await _repository.Create(newProject);
+                return CreatedAtAction(nameof(Post), project);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
 
-        // PUT api/<ValuesController>/5
+        // PUT api/project/GUID
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<ActionResult<Projects>> Put(string id, Projects updatedProject)
         {
+            try
+            {
+                if (id != updatedProject.Id)
+                {
+                    return BadRequest("ID provided in URL doesn't match the ID in the request body.");
+                }
+                var result = await _repository.Update(updatedProject);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
 
-        // DELETE api/<ValuesController>/5
+        // DELETE api/project/GUID --> continue here
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<ActionResult<bool>> Delete(string id)
         {
+            try
+            {
+                bool result = await _repository.Delete(id);
+                if (!result)
+                {
+                    return NotFound("Resource with given ID could not be found.");
+                }
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
     }
 }

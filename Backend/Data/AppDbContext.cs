@@ -18,9 +18,9 @@ namespace Backend.Data
             optionsBuilder.UseNpgsql(configuration.GetConnectionString("WebApiDatabase"));
         }
 
-        public DbSet<Project> Projects { get; set; }
-        public DbSet<Ticket> Tickets { get; set; }
-        public DbSet<User> Users { get; set; }
+        public DbSet<Projects> Projects { get; set; }
+        public DbSet<Tickets> Tickets { get; set; }
+        public DbSet<Users> Users { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<UserProjects> UserProjects { get; set; }
         public DbSet<UserTickets> UserTickets { get; set; }
