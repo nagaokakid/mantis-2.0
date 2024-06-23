@@ -21,7 +21,7 @@ namespace Backend.Data
         public DbSet<Projects> Projects { get; set; }
         public DbSet<Tickets> Tickets { get; set; }
         public DbSet<Users> Users { get; set; }
-        public DbSet<Comment> Comments { get; set; }
+        public DbSet<Comments> Comments { get; set; }
         public DbSet<UserProjects> UserProjects { get; set; }
         public DbSet<UserTickets> UserTickets { get; set; }
     }

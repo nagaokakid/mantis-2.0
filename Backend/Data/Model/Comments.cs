@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Backend.Data.Model
 {
     // 1-to-M relationship btwn user -> comment AND ticket -> comment
-    public class Comment
+    public class Comments
     {
         [Key]
         public string Id { get; set; }
