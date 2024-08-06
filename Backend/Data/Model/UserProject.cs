@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Backend.Data.Model
 {
     // M-to-N relationship between User and Projects table
-    public class UserProjects
+    public class UserProject
     {
         [Key]
         public string Id {  get; set; }
@@ -16,9 +16,9 @@ namespace Backend.Data.Model
         public string ProjectId {  get; set; }
 
         [ForeignKey("UserId")]
-        public Users User { get; set; }
+        public User User { get; set; }
 
         [ForeignKey("ProjectId")]
-        public Projects Project {  get; set; }
+        public Project Project {  get; set; }
     }
 }

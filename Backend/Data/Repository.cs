@@ -49,7 +49,7 @@ namespace Backend.Data
         public async Task<TEntity> Create(TEntity entity)
         {
             try
-            {            
+            {
                 var entityEntry = await _appDbContext.AddAsync<TEntity>(entity);
                 await _appDbContext.SaveChangesAsync();
                 return entityEntry.Entity;

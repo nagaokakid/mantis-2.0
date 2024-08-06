@@ -16,7 +16,7 @@ namespace Backend.UnitTests
                 private Repository<UserProjects> _repo;*/
 
         private Mock<AppDbContext> _mockContext;
-        private Repository<UserProjects> _repo;
+        private Repository<UserProject> _repo;
 
         private Mock<AppDbContext> CreateMockDbContext()
         {
@@ -46,17 +46,17 @@ namespace Backend.UnitTests
         public void Setup()
         {
             _mockContext = CreateMockDbContext();
-            _repo = new Repository<UserProjects>(_mockContext.Object);
+            _repo = new Repository<UserProject>(_mockContext.Object);
         }
 
         [Test]
         public async Task GetAll_ReturnsAllEntities()
         {
-            List<UserProjects> data = new List<UserProjects>()
+            List<UserProject> data = new List<UserProject>()
             {
-                new UserProjects {Id = "1", UserId = "1", ProjectId = "1"},
-                new UserProjects {Id = "2", UserId = "2", ProjectId = "2"},
-                new UserProjects {Id = "3", UserId = "3", ProjectId = "3"}
+                new UserProject {Id = "1", UserId = "1", ProjectId = "1"},
+                new UserProject {Id = "2", UserId = "2", ProjectId = "2"},
+                new UserProject {Id = "3", UserId = "3", ProjectId = "3"}
             };
 
             _mockContext.Object.UserProjects.AddRange(data);

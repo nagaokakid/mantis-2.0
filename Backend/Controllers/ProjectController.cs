@@ -9,18 +9,18 @@ namespace Backend.Controllers
     [Route("api/[controller]")]
     [ApiController]
 
-    public class ProjectsController : ControllerBase
+    public class ProjectController : ControllerBase
     {
-        private Repository<Projects> _repository;
+        private Repository<Project> _repository;
 
-        public ProjectsController(AppDbContext context)
+        public ProjectController(AppDbContext context)
         {
-            _repository = new Repository<Projects>(context);
+            _repository = new Repository<Project>(context);
         }
 
         // GET: api/projects
         [HttpGet]
-        public async Task<ActionResult<IQueryable<Projects>>> Get()
+        public async Task<ActionResult<IQueryable<Project>>> Get()
         {
             try
             {
@@ -35,7 +35,7 @@ namespace Backend.Controllers
 
         // GET api/projects/GUID
         [HttpGet("{id}")]
-        public async Task<ActionResult<Projects>> Get(string id)
+        public async Task<ActionResult<Project>> Get(string id)
         {
             try
             {
@@ -55,10 +55,11 @@ namespace Backend.Controllers
 
         // POST api/project
         [HttpPost]
-        public async Task<ActionResult<Projects>> Post(Projects newProject)
+        public async Task<ActionResult<Project>> Post(Project newProject)
         {
             try
             {
+                newProject.Id = Guid.NewGuid().ToString();
                 var project = await _repository.Create(newProject);
                 return CreatedAtAction(nameof(Post), project);
             }
@@ -70,7 +71,7 @@ namespace Backend.Controllers
 
         // PUT api/project/GUID
         [HttpPut("{id}")]
-        public async Task<ActionResult<Projects>> Put(string id, Projects updatedProject)
+        public async Task<ActionResult<Project>> Put(string id, Project updatedProject)
         {
             try
             {

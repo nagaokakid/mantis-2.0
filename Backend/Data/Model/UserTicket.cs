@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Backend.Data.Model
 {
     // M-to-N relationship between User and Ticket table
-    public class UserTickets
+    public class UserTicket
     {
         [Key]
         public string Id {  get; set; }
@@ -16,9 +16,9 @@ namespace Backend.Data.Model
         public string TicketId { get; set; }
 
         [ForeignKey("UserId")]
-        public Users User {  get; set; }
+        public User User {  get; set; }
 
         [ForeignKey("TicketId")]
-        public Tickets Ticket {  get; set; }
+        public Ticket Ticket {  get; set; }
     }
 }

@@ -1,11 +1,18 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace Backend.Data.Model
+interface Ticket
 {
-    // 1-to-M relationship btwn project and ticket table
-    public class Tickets
-    {
+    Id: string,
+    ProjectId: string,
+    Title: string,
+    Description: string,
+    StartDate: Date,
+    EndDate: Date,
+    Priority: string,
+    Difficulty: string
+}
+
+export default Ticket
+
+/*
         [Key]
         public string Id {  get; set; }
 
@@ -14,7 +21,7 @@ namespace Backend.Data.Model
         public string ProjectId {  get; set; }
         
         [ForeignKey("ProjectId")]
-        public Projects Project {  get; set; }
+        public Project Project {  get; set; }
 
         [Required]
         public string Title { get; set; }
@@ -32,7 +39,4 @@ namespace Backend.Data.Model
         public string Difficulty {  get; set; }
         
         // file path OR location property?
-
-
-    }
-}
+*/

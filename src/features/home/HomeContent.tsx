@@ -3,6 +3,7 @@ import HomeMenu from './HomeMenu';
 import {useState} from 'react';
 import Dashboard from '../dashboard/Dashboard';
 import HomeNavBar from './HomeNavBar';
+import Projects from '../projects/Projects';
 
 
 const HomeContent: React.FC = () => {
@@ -20,6 +21,7 @@ const HomeContent: React.FC = () => {
 
         <div className="w-full break-words">
             {selectedItem === "Dashboard" && <Dashboard/>}
+            {selectedItem === "Projects" && <Projects/>}
         </div>
 
       </div>
