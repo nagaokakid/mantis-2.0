@@ -29,4 +29,8 @@
     <InternalsVisibleTo Include="..\Backend.IntegrationTests" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>
