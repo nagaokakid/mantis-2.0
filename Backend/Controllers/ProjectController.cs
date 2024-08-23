@@ -19,7 +19,7 @@ namespace Backend.Controllers
             _projectService = new ProjectService(context);
         }
 
-        // GET: api/projects
+        // GET: api/project
         [HttpGet]
         public async Task<ActionResult<IQueryable<Project>>> Get()
         {
@@ -34,7 +34,7 @@ namespace Backend.Controllers
             }
         }
 
-        // GET api/projects/GUID
+        // GET api/project/GUID
         [HttpGet("{id}")]
         public async Task<ActionResult<Project>> Get(string id)
         {
