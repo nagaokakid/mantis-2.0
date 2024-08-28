@@ -6,23 +6,25 @@ namespace Backend.Data
 {
     public class AppDbContext : DbContext
     {
-        protected readonly IConfiguration configuration;
+        public AppDbContext(DbContextOptions options): base(options) { }
 
-        public AppDbContext(IConfiguration configuration)
+        // protected readonly IConfiguration configuration;
+
+/*        public AppDbContext(IConfiguration configuration)
         {
             this.configuration = configuration;
         }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+*/
+/*        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseNpgsql(configuration.GetConnectionString("WebApiDatabase"));
-        }
+        }*/
 
-        public DbSet<Projects> Projects { get; set; }
-        public DbSet<Tickets> Tickets { get; set; }
-        public DbSet<Users> Users { get; set; }
-        public DbSet<Comments> Comments { get; set; }
-        public DbSet<UserProjects> UserProjects { get; set; }
-        public DbSet<UserTickets> UserTickets { get; set; }
+        public DbSet<Project> Projects { get; set; }
+        public DbSet<Ticket> Tickets { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Comment> Comments { get; set; }
+        public DbSet<UserProject> UserProjects { get; set; }
+        public DbSet<UserTicket> UserTickets { get; set; }
     }
 }

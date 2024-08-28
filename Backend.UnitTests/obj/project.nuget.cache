@@ -1,6 +1,10 @@
 {
   "version": 2,
+<<<<<<< HEAD
+  "dgSpecHash": "+QEJOEMHJ1E=",
+=======
   "dgSpecHash": "V2/mTMr8iNY=",
+>>>>>>> main
   "success": true,
   "projectFilePath": "C:\\Users\\Akira Cooper\\mantis-2.0\\Backend.UnitTests\\Backend.UnitTests.csproj",
   "expectedPackageFiles": [

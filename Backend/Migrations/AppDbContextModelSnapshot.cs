@@ -17,7 +17,7 @@ namespace Backend.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.17")
+                .HasAnnotation("ProductVersion", "8.0.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -55,7 +55,7 @@ namespace Backend.Migrations
                     b.ToTable("Comments");
                 });
 
-            modelBuilder.Entity("Backend.Data.Model.Projects", b =>
+            modelBuilder.Entity("Backend.Data.Model.Project", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("text");
@@ -64,7 +64,7 @@ namespace Backend.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("EndDate")
+                    b.Property<DateTime?>("EndDate")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<DateTime>("StartDate")
@@ -79,7 +79,7 @@ namespace Backend.Migrations
                     b.ToTable("Projects");
                 });
 
-            modelBuilder.Entity("Backend.Data.Model.Tickets", b =>
+            modelBuilder.Entity("Backend.Data.Model.Ticket", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("text");
@@ -117,51 +117,7 @@ namespace Backend.Migrations
                     b.ToTable("Tickets");
                 });
 
-            modelBuilder.Entity("Backend.Data.Model.UserProjects", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("text");
-
-                    b.Property<string>("ProjectId")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProjectId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("UserProjects");
-                });
-
-            modelBuilder.Entity("Backend.Data.Model.UserTickets", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("text");
-
-                    b.Property<string>("TicketId")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("TicketId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("UserTickets");
-                });
-
-            modelBuilder.Entity("Backend.Data.Model.Users", b =>
+            modelBuilder.Entity("Backend.Data.Model.User", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("text");
@@ -194,15 +150,59 @@ namespace Backend.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("Backend.Data.Model.UserProject", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ProjectId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProjectId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserProjects");
+                });
+
+            modelBuilder.Entity("Backend.Data.Model.UserTicket", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
+
+                    b.Property<string>("TicketId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TicketId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserTickets");
+                });
+
             modelBuilder.Entity("Backend.Data.Model.Comment", b =>
                 {
-                    b.HasOne("Backend.Data.Model.Tickets", "Ticket")
+                    b.HasOne("Backend.Data.Model.Ticket", "Ticket")
                         .WithMany()
                         .HasForeignKey("TicketId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Backend.Data.Model.Users", "User")
+                    b.HasOne("Backend.Data.Model.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -213,9 +213,9 @@ namespace Backend.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Backend.Data.Model.Tickets", b =>
+            modelBuilder.Entity("Backend.Data.Model.Ticket", b =>
                 {
-                    b.HasOne("Backend.Data.Model.Projects", "Project")
+                    b.HasOne("Backend.Data.Model.Project", "Project")
                         .WithMany()
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -224,15 +224,15 @@ namespace Backend.Migrations
                     b.Navigation("Project");
                 });
 
-            modelBuilder.Entity("Backend.Data.Model.UserProjects", b =>
+            modelBuilder.Entity("Backend.Data.Model.UserProject", b =>
                 {
-                    b.HasOne("Backend.Data.Model.Projects", "Project")
+                    b.HasOne("Backend.Data.Model.Project", "Project")
                         .WithMany()
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Backend.Data.Model.Users", "User")
+                    b.HasOne("Backend.Data.Model.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -243,15 +243,15 @@ namespace Backend.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Backend.Data.Model.UserTickets", b =>
+            modelBuilder.Entity("Backend.Data.Model.UserTicket", b =>
                 {
-                    b.HasOne("Backend.Data.Model.Tickets", "Ticket")
+                    b.HasOne("Backend.Data.Model.Ticket", "Ticket")
                         .WithMany()
                         .HasForeignKey("TicketId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Backend.Data.Model.Users", "User")
+                    b.HasOne("Backend.Data.Model.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
