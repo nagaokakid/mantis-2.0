@@ -12,12 +12,12 @@ namespace Backend.Services
             _projectRepo = new Repository<Projects>(appDbContext);
         }
 
-        public async Task<Projects> GetAllProjects(string id)
+        public async Task<IQueryable<Projects>> GetAllProjects()
         {
-            return await _projectRepo.GetById(id);
+            return await _projectRepo.GetAll();
         }
 
-        public async Task<Projects> GetProjects(string id)
+        public async Task<Projects> GetProject(string id)
         {
             return await _projectRepo.GetById(id);
         }

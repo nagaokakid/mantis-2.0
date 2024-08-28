@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Backend.Data;
 using Backend.Data.Model;
+using Backend.Services;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -11,11 +12,11 @@ namespace Backend.Controllers
 
     public class ProjectsController : ControllerBase
     {
-        private Repository<Projects> _repository;
+        private ProjectService _projectService;
 
         public ProjectsController(AppDbContext context)
         {
-            _repository = new Repository<Projects>(context);
+            _projectService = new ProjectService(context);
         }
 
         // GET: api/projects
@@ -24,7 +25,7 @@ namespace Backend.Controllers
         {
             try
             {
-                var projects = await _repository.GetAll();
+                var projects = await _projectService.GetAllProjects();
                 return Ok(projects);
             }
             catch (Exception ex) 
@@ -39,7 +40,7 @@ namespace Backend.Controllers
         {
             try
             {
-                var project = await _repository.GetById(id);
+                var project = await _projectService.GetProject(id);
                 if (project == null)
                 {
                     return NotFound();
@@ -59,7 +60,7 @@ namespace Backend.Controllers
         {
             try
             {
-                var project = await _repository.Create(newProject);
+                var project = await _projectService.CreateProject(newProject);
                 return CreatedAtAction(nameof(Post), project);
             }
             catch (Exception ex)
@@ -78,7 +79,7 @@ namespace Backend.Controllers
                 {
                     return BadRequest("ID provided in URL doesn't match the ID in the request body.");
                 }
-                var result = await _repository.Update(updatedProject);
+                var result = await _projectService.UpdateProject(updatedProject);
                 return Ok(result);
             }
             catch (Exception ex)
@@ -87,16 +88,16 @@ namespace Backend.Controllers
             }
         }
 
-        // DELETE api/project/GUID --> continue here
+        // DELETE api/project/GUID
         [HttpDelete("{id}")]
         public async Task<ActionResult<bool>> Delete(string id)
         {
             try
             {
-                bool result = await _repository.Delete(id);
+                bool result = await _projectService.DeleteProject(id);
                 if (!result)
                 {
-                    return NotFound("Resource with given ID could not be found.");
+                    return NotFound("Project with given ID could not be found.");
                 }
                 return result;
             }
