@@ -20,6 +20,7 @@ namespace Backend.IntegrationTests
         private readonly Project _project1;
         private readonly Project _project2;
 
+        // Setup
         public ProjectServiceTests()
         {
             var configuration = new ConfigurationBuilder()
@@ -54,6 +55,17 @@ namespace Backend.IntegrationTests
             }
         }
 
+        // Teardown
+        public void Dispose()
+        {
+            using (var scope = _serviceProvider.CreateScope())
+            {
+                var projectService = scope.ServiceProvider.GetRequiredService<ProjectService>();
+                projectService.DeleteProject(_project1.Id).GetAwaiter().GetResult();
+                projectService.DeleteProject(_project2.Id).GetAwaiter().GetResult();
+            }
+        }
+
         private Project CreateProjectObject()
         {
             var project = new Project()
@@ -62,7 +74,7 @@ namespace Backend.IntegrationTests
                 Title = "test title",
                 Description = "test desc",
                 StartDate = DateTime.Now.ToUniversalTime(),
-                EndDate = DateTime.Now.ToUniversalTime()
+                EndDate = null
             };
 
             return project;
@@ -73,19 +85,25 @@ namespace Backend.IntegrationTests
             await projectService.CreateProject(newProject);
         }
 
-        public void Dispose()
+        private DateTime TruncateDateTimeValue(DateTime value)
         {
-            using (var scope = _serviceProvider.CreateScope())
-            {
-                var projectService = scope.ServiceProvider.GetRequiredService<ProjectService>();
-                projectService.DeleteProject(_project1.Id).GetAwaiter().GetResult();
-                projectService.DeleteProject(_project2.Id).GetAwaiter().GetResult();
-            }
+            var newValue = new DateTime(
+                value.Year,
+                value.Month,
+                value.Day,
+                value.Hour,
+                value.Minute,
+                0,
+                0,
+                DateTimeKind.Utc
+            );
+
+            return newValue;
         }
         
         // Fetch all projects from cloud database and check property values
         [Fact]
-        public async Task GetAllProjects()
+        public async Task GetAllProjectsReturnsTwoProjects()
         {
             using (var scope = _serviceProvider.CreateScope())
             {
@@ -97,9 +115,25 @@ namespace Backend.IntegrationTests
                 var firstProjectFromDatabase = list[0];
                 var secondProjectFromDatabase = list[1];
 
+                Assert.Equal(2, list.Count);
+
                 Assert.Equal(_project1.Id, firstProjectFromDatabase.Id);
+                Assert.Equal(_project1.Title, firstProjectFromDatabase.Title);
+                Assert.Equal(_project1.Description, firstProjectFromDatabase.Description);
+                Assert.Equal(TruncateDateTimeValue(_project1.StartDate), 
+                    TruncateDateTimeValue(firstProjectFromDatabase.StartDate));
+
                 Assert.Equal(_project2.Id, secondProjectFromDatabase.Id);
+                Assert.Equal(_project2.Title, secondProjectFromDatabase.Title);
+                Assert.Equal(_project2.Description, secondProjectFromDatabase.Description);
+                Assert.Equal(TruncateDateTimeValue(_project2.StartDate), 
+                    TruncateDateTimeValue(secondProjectFromDatabase.StartDate));
             }
+        }
+
+        public async Task GetProjectById()
+        {
+
         }
 
 

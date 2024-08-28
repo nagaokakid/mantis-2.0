@@ -9,43 +9,43 @@ namespace Backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    
-    public class ProjectController : ControllerBase
-    {
-        private readonly ProjectService _projectService;
 
-        public ProjectController(AppDbContext context)
+    public class TicketController : ControllerBase
+    {
+        private readonly TicketService _ticketService;
+
+        public TicketController(AppDbContext context)
         {
-            _projectService = new ProjectService(context);
+            _ticketService = new TicketService(context);
         }
 
-        // GET: api/project
+        // GET: api/ticket
         [HttpGet]
-        public ActionResult<IQueryable<Project>> Get()
+        public ActionResult<IQueryable<Ticket>> Get()
         {
             try
             {
-                var projects = _projectService.GetAllProjects();
-                return Ok(projects);
+                var tickets = _ticketService.GetAllTickets();
+                return Ok(tickets);
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 return StatusCode(500, ex.Message);
             }
         }
 
-        // GET api/project/GUID
+        // GET api/ticket/GUID
         [HttpGet("{id}")]
-        public async Task<ActionResult<Project>> Get(string id)
+        public async Task<ActionResult<Ticket>> Get(string id)
         {
             try
             {
-                var project = await _projectService.GetProject(id);
-                if (project == null)
+                var ticket = await _ticketService.GetTicket(id);
+                if (ticket == null)
                 {
                     return NotFound();
                 }
-                return Ok(project);
+                return Ok(ticket);
             }
             catch (Exception ex)
             {
@@ -54,16 +54,16 @@ namespace Backend.Controllers
 
         }
 
-        // POST api/project
+        // POST api/ticket
         [HttpPost]
-        public async Task<ActionResult<Project>> Post([FromBody] Project newProject)
+        public async Task<ActionResult<Ticket>> Post([FromBody] Ticket newTicket)
         {
             try
             {
-                newProject.Id = Guid.NewGuid().ToString();
-                newProject.StartDate = newProject.StartDate.ToUniversalTime();
-                var project = await _projectService.CreateProject(newProject);
-                return CreatedAtAction(nameof(Post), project);
+                newTicket.Id = Guid.NewGuid().ToString();
+                newTicket.StartDate = newTicket.StartDate.ToUniversalTime();
+                var ticket = await _ticketService.CreateTicket(newTicket);
+                return CreatedAtAction(nameof(Post), ticket);
             }
             catch (Exception ex)
             {
@@ -71,17 +71,17 @@ namespace Backend.Controllers
             }
         }
 
-        // PUT api/project/GUID
+        // PUT api/ticket/GUID
         [HttpPut("{id}")]
-        public async Task<ActionResult<Project>> Put(string id, [FromBody] Project updatedProject)
+        public async Task<ActionResult<Ticket>> Put(string id, [FromBody] Ticket updatedTicket)
         {
             try
             {
-                if (id != updatedProject.Id)
+                if (id != updatedTicket.Id)
                 {
                     return BadRequest("ID provided in URL doesn't match the ID in the request body.");
                 }
-                var result = await _projectService.UpdateProject(updatedProject);
+                var result = await _ticketService.UpdateTicket(updatedTicket);
                 return Ok(result);
             }
             catch (Exception ex)
@@ -90,13 +90,13 @@ namespace Backend.Controllers
             }
         }
 
-        // DELETE api/project/GUID
+        // DELETE api/ticket/GUID
         [HttpDelete("{id}")]
         public async Task<ActionResult<bool>> Delete(string id)
         {
             try
             {
-                bool result = await _projectService.DeleteProject(id);
+                bool result = await _ticketService.DeleteTicket(id);
                 if (!result)
                 {
                     return NotFound("Resource with given ID could not be found.");

@@ -12,12 +12,12 @@ namespace Backend.Services
             _commentRepo = new Repository<Comment>(appDbContext);
         }
 
-        public async Task<Comment> GetAllComments(string id)
+        public IQueryable<Comment> GetAllComments()
         {
-            return await _commentRepo.GetById(id);
+            return _commentRepo.GetAll();
         }
 
-        public async Task<Comment> GetComment(string id)
+        public async Task<Comment?> GetComment(string id)
         {
             return await _commentRepo.GetById(id);
         }

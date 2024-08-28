@@ -9,43 +9,43 @@ namespace Backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    
-    public class ProjectController : ControllerBase
-    {
-        private readonly ProjectService _projectService;
 
-        public ProjectController(AppDbContext context)
+    public class CommentController : ControllerBase
+    {
+        private readonly CommentService _commentService;
+
+        public CommentController(AppDbContext context)
         {
-            _projectService = new ProjectService(context);
+            _commentService = new CommentService(context);
         }
 
-        // GET: api/project
+        // GET: api/comment
         [HttpGet]
-        public ActionResult<IQueryable<Project>> Get()
+        public ActionResult<IQueryable<Comment>> Get()
         {
             try
             {
-                var projects = _projectService.GetAllProjects();
-                return Ok(projects);
+                var comments = _commentService.GetAllComments();
+                return Ok(comments);
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 return StatusCode(500, ex.Message);
             }
         }
 
-        // GET api/project/GUID
+        // GET api/comment/GUID
         [HttpGet("{id}")]
-        public async Task<ActionResult<Project>> Get(string id)
+        public async Task<ActionResult<Comment>> Get(string id)
         {
             try
             {
-                var project = await _projectService.GetProject(id);
-                if (project == null)
+                var comment = await _commentService.GetComment(id);
+                if (comment == null)
                 {
                     return NotFound();
                 }
-                return Ok(project);
+                return Ok(comment);
             }
             catch (Exception ex)
             {
@@ -54,16 +54,16 @@ namespace Backend.Controllers
 
         }
 
-        // POST api/project
+        // POST api/comment
         [HttpPost]
-        public async Task<ActionResult<Project>> Post([FromBody] Project newProject)
+        public async Task<ActionResult<Comment>> Post([FromBody] Comment newComment)
         {
             try
             {
-                newProject.Id = Guid.NewGuid().ToString();
-                newProject.StartDate = newProject.StartDate.ToUniversalTime();
-                var project = await _projectService.CreateProject(newProject);
-                return CreatedAtAction(nameof(Post), project);
+                newComment.Id = Guid.NewGuid().ToString();
+                newComment.Date = newComment.Date.ToUniversalTime();
+                var comment = await _commentService.CreateComment(newComment);
+                return CreatedAtAction(nameof(Post), comment);
             }
             catch (Exception ex)
             {
@@ -71,17 +71,17 @@ namespace Backend.Controllers
             }
         }
 
-        // PUT api/project/GUID
+        // PUT api/comment/GUID
         [HttpPut("{id}")]
-        public async Task<ActionResult<Project>> Put(string id, [FromBody] Project updatedProject)
+        public async Task<ActionResult<Comment>> Put(string id, [FromBody] Comment updatedComment)
         {
             try
             {
-                if (id != updatedProject.Id)
+                if (id != updatedComment.Id)
                 {
                     return BadRequest("ID provided in URL doesn't match the ID in the request body.");
                 }
-                var result = await _projectService.UpdateProject(updatedProject);
+                var result = await _commentService.UpdateComment(updatedComment);
                 return Ok(result);
             }
             catch (Exception ex)
@@ -90,13 +90,13 @@ namespace Backend.Controllers
             }
         }
 
-        // DELETE api/project/GUID
+        // DELETE api/comment/GUID
         [HttpDelete("{id}")]
         public async Task<ActionResult<bool>> Delete(string id)
         {
             try
             {
-                bool result = await _projectService.DeleteProject(id);
+                bool result = await _commentService.DeleteComment(id);
                 if (!result)
                 {
                     return NotFound("Resource with given ID could not be found.");
