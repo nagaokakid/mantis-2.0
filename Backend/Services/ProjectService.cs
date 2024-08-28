@@ -25,29 +25,12 @@ namespace Backend.Services
 
         public async Task<Project?> GetProject(string id)
         {
+            return await _projectRepo.GetAll();
+        }
+
+        public async Task<Projects> GetProjects(string id)
+        {
             return await _projectRepo.GetById(id);
-        }
-
-        public List<Ticket> GetAllProjectTickets(string projectId)
-        {
-            var ticketTable = _ticketRepo.GetAll();
-            var projectTickets = ticketTable.Where(entry => entry.ProjectId == projectId).ToList();
-            return projectTickets;
-        }
-
-        public async Task<List<User>> GetAllProjectUsers(string projectId)
-        {
-            var userProjectsTable = _userProjectRepo.GetAll();
-            var userIds = userProjectsTable.Where(entry => entry.ProjectId == projectId).ToList();
-            List<User> users = new List<User>();
-
-            foreach(var listItem in userIds)
-            {
-                var user = await _userRepo.GetById(listItem.UserId);
-                if (user != null) { users.Add(user); }
-            }
-
-            return users;
         }
 
         public async Task<Project> CreateProject(Project newProject)
