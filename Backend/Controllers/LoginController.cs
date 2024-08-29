@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Backend.Data;
+using Backend.Data.DTO;
 using Backend.Services;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -20,18 +21,18 @@ namespace Backend.Controllers
 
         // POST api/login/
         [HttpPost]
-        public async Task<ActionResult> Post([FromBody] string email, [FromBody] string hashPass)
+        public async Task<ActionResult> Post([FromBody] UserLoginInfo userLoginInfo)
         {
             try
             {
-                var user = await _userService.GetUserByEmail(email);
+                var user = await _userService.GetUserByEmail(userLoginInfo.Email);
                 if (user == null)
                 {
                     return Unauthorized("Incorrect email");
                 }
             
-                var dbHashPass = user.Password;
-                if (hashPass == dbHashPass)
+                var hashPass = user.Password;
+                if (hashPass == userLoginInfo.HashValue)
                 {
                     return Ok();
                 }
