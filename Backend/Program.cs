@@ -11,10 +11,39 @@ namespace Backend
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowOrigins", builder =>
+                {
+                    builder.WithOrigins("http://localhost", 
+                        "https://localhost", 
+                        "https://mantis-20-frontend-plzzn2typ-nagaokakids-projects.vercel.app/")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
+                });
+            });
+
+            string connectionString;
+
+            if (!string.IsNullOrEmpty(Environment.GetEnvironmentVariable("DB_HOST"))) // if running on deployment server...
+            {
+                // use environment variables for db connection string
+                connectionString =
+                    $"Host={Environment.GetEnvironmentVariable("DB_HOST")};" +
+                    $"Port={Environment.GetEnvironmentVariable("DB_PORT")};" +
+                    $"Database={Environment.GetEnvironmentVariable("DB_NAME")};" +
+                    $"Username={Environment.GetEnvironmentVariable("DB_USERNAME")};" +
+                    $"Password={Environment.GetEnvironmentVariable("DB_API_KEY")}";
+            }
+            else 
+            {
+                // use secrets.json for local
+                connectionString = builder.Configuration.GetConnectionString("WebApiDatabase");
+            }
+
+
             // Add Postgres database context
-            /*builder.Services.AddScoped<AppDbContext>();*/
-            builder.Services.AddDbContext<AppDbContext>(options =>
-                options.UseNpgsql(builder.Configuration.GetConnectionString("WebApiDatabase")));
+            builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(connectionString));
 
             // Add controllers to the container
             builder.Services.AddControllers();
@@ -32,6 +61,8 @@ namespace Backend
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+
+            app.UseCors("AllowOrigins");
 
             app.UseHttpsRedirection();
 
