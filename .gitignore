@@ -27,3 +27,4 @@ dist-ssr
 Backend/.vs/*
 Backend/bin/*
 Backend/obj/*
+Backend.IntegrationTests/obj/*

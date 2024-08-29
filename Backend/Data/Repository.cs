@@ -18,7 +18,7 @@ namespace Backend.Data
             _appDbContext = context;
         }
        
-        public async Task<IQueryable<TEntity>> GetAll()
+        public IQueryable<TEntity> GetAll()
         {
             try
             {
@@ -32,7 +32,7 @@ namespace Backend.Data
             
         }
 
-        public async Task<TEntity> GetById(string id)
+        public async Task<TEntity?> GetById(string id)
         {
             try
             {
@@ -49,7 +49,7 @@ namespace Backend.Data
         public async Task<TEntity> Create(TEntity entity)
         {
             try
-            {            
+            {
                 var entityEntry = await _appDbContext.AddAsync<TEntity>(entity);
                 await _appDbContext.SaveChangesAsync();
                 return entityEntry.Entity;

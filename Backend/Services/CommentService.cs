@@ -5,29 +5,29 @@ namespace Backend.Services
 {
     public class CommentService
     {
-        private readonly Repository<Comments> _commentRepo;
+        private readonly Repository<Comment> _commentRepo;
 
         public CommentService(AppDbContext appDbContext)
         {
-            _commentRepo = new Repository<Comments>(appDbContext);
+            _commentRepo = new Repository<Comment>(appDbContext);
         }
 
-        public async Task<Comments> GetAllComments(string id)
+        public IQueryable<Comment> GetAllComments()
+        {
+            return _commentRepo.GetAll();
+        }
+
+        public async Task<Comment?> GetComment(string id)
         {
             return await _commentRepo.GetById(id);
         }
 
-        public async Task<Comments> GetComment(string id)
-        {
-            return await _commentRepo.GetById(id);
-        }
-
-        public async Task<Comments> CreateComment(Comments newComment)
+        public async Task<Comment> CreateComment(Comment newComment)
         {
             return await _commentRepo.Create(newComment);
         }
 
-        public async Task<Comments> UpdateComment(Comments updatedComment)
+        public async Task<Comment> UpdateComment(Comment updatedComment)
         {
             return await _commentRepo.Update(updatedComment);
         }
