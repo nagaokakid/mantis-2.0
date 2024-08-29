@@ -28,3 +28,4 @@ Backend/.vs/*
 Backend/bin/*
 Backend/obj/*
 Backend.IntegrationTests/obj/*
+Backend.IntegrationTests/obj/Debug/*
