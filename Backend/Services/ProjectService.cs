@@ -25,11 +25,6 @@ namespace Backend.Services
 
         public async Task<Project?> GetProject(string id)
         {
-            return await _projectRepo.GetAll();
-        }
-
-        public async Task<Projects> GetProjects(string id)
-        {
             return await _projectRepo.GetById(id);
         }
 
