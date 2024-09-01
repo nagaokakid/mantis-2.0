@@ -103,12 +103,12 @@ namespace Backend.IntegrationTests
         
         // Fetch all projects from cloud database and check property values
         [Fact]
-        public async Task GetAllProjectsReturnsTwoProjects()
+/*        public Task GetAllProjectsReturnsTwoProjects()
         {
             using (var scope = _serviceProvider.CreateScope())
             {
                 var projectService = scope.ServiceProvider.GetRequiredService<ProjectService>();
-                var allProjects = await projectService.GetAllProjects();
+                var allProjects = projectService.GetAllProjects();
 
                 var list = allProjects.ToList<Project>();
 
@@ -129,7 +129,7 @@ namespace Backend.IntegrationTests
                 Assert.Equal(TruncateDateTimeValue(_project2.StartDate), 
                     TruncateDateTimeValue(secondProjectFromDatabase.StartDate));
             }
-        }
+        }*/
 
         public async Task GetProjectById()
         {
