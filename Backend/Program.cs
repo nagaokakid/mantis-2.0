@@ -15,8 +15,8 @@ namespace Backend
             {
                 options.AddPolicy("AllowOrigins", builder =>
                 {
-                    builder.WithOrigins("http://localhost:*", 
-                        "https://localhost:*", 
+                    builder.WithOrigins("http://localhost:5173", 
+                        "https://localhost:5173", 
                         "https://mantis-20-frontend-plzzn2typ-nagaokakids-projects.vercel.app/")
                     .AllowAnyHeader()
                     .AllowAnyMethod();

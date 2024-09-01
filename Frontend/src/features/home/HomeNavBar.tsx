@@ -43,7 +43,7 @@ const HomeNavBar = () => {
       <div className="flex justify-between items-center px-4">
         <div className="flex items-center pr-12">
           <img src={LogoImage} className="w-10" alt="Mantis Logo" />
-          <div><a className="text-xl text-emerald-600 font-mono font-bold ml-2">MANTIS</a></div>
+          <div><a className="text-xl text-emerald-600 ml-2">MANTIS</a></div>
           
         </div>
 
