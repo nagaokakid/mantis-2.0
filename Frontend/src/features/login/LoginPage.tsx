@@ -19,7 +19,7 @@ const LoginPage = () => {
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const response = await LoginRequest(email, password);
-    console.log(response);
+    console.log(response); // TBC: more logic needed here to handle login attempt...
   }
 
   return (

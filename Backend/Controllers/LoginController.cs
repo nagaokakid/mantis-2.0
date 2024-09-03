@@ -25,6 +25,12 @@ namespace Backend.Controllers
         {
             try
             {
+                if (userLoginInfo == null || string.IsNullOrWhiteSpace(userLoginInfo.Email) || 
+                    string.IsNullOrWhiteSpace(userLoginInfo.Password))
+                {
+                    return BadRequest("Invalid input data. Please review client-side code to ensure DTO properties are correctly formatted.");
+                }
+
                 var user = await _userService.GetUserByEmail(userLoginInfo.Email);
                 if (user == null)
                 {
@@ -32,7 +38,7 @@ namespace Backend.Controllers
                 }
             
                 var hashPass = user.Password;
-                if (hashPass == userLoginInfo.HashValue)
+                if (hashPass == userLoginInfo.Password)
                 {
                     return Ok();
                 }
