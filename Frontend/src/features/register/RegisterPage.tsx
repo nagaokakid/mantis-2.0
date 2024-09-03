@@ -45,6 +45,7 @@ const RegisterPage = () => {
     // state used to disable button submit and key down to prevent duplicate user creation
     setIsRegistering(true);
 
+    // check if passwords match and email is valid
     switch (true)
     {
       case (formData.password !== formData.confirmPassword): // passwords have to match
@@ -64,12 +65,14 @@ const RegisterPage = () => {
     {
       setIsNewEmail(false); // email already exists in db; can't register user
       setIsRegistering(false);
+      console.error(`Message: ${response.text()}`)
       return;
     }
     else if (!response.ok)
     {
       setIsStatusOk(false); // server responded with different error; can't register user
       setIsRegistering(false);
+      console.error(`Message: ${response.text()}`)
       return;
     }
 
@@ -123,7 +126,7 @@ const RegisterPage = () => {
         </div>
       </div>)}
 
-      {/* Server error dialog */}
+      {/* Server response error dialog */}
       {!isStatusOk && (<div className="modal modal-open">
         <div className="modal-box">
           <h3 className="font-bold text-lg">Oops...something went wrong!</h3>

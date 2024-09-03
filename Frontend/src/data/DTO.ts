@@ -4,6 +4,16 @@ export interface UserLoginInfo
     Password: string
 }
 
+export interface SuccessfulUserLoginInfo
+{
+    Id: string,
+    FirstName: string,
+    LastName: string,
+    UserName: string,
+    ProjectCount: number,
+    TicketCount: number
+}
+
 export interface UserRegisterInfo
 {
     FirstName: string,

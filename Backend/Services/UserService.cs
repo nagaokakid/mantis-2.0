@@ -34,12 +34,7 @@ namespace Backend.Services
         public async Task<User?> GetUserByEmail(string email)
         {
             var users = _userRepo.GetAll();
-            var matchedUser = users.Where(u => u.Email == email);
-            if (matchedUser.Any())
-            {
-                return await matchedUser.FirstAsync();
-            }
-            return null;
+            return await users.FirstOrDefaultAsync(u => u.Email == email);
         }
 
         // Retrieve all projects belonging to a single user
@@ -80,6 +75,22 @@ namespace Backend.Services
             var commentTable = _commentRepo.GetAll();
             var userComments = commentTable.Where(entry => entry.UserId == userId).ToList();
             return userComments;
+        }
+
+        // Get number of projects for a single user
+        public int GetProjectCount(string userId)
+        {
+            var allProjectIds = _userProjectsRepo.GetAll();
+            int count = allProjectIds.Where(entry => entry.UserId == userId).Count();
+            return count;
+        }
+
+        // Get number of tickets for a single user
+        public int GetTicketCount(string userId)
+        {
+            var allTicketIds = _userTicketsRepo.GetAll();
+            int count = allTicketIds.Where(entry => entry.UserId == userId).Count();
+            return count;
         }
 
         // Create a new user

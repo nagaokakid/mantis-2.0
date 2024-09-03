@@ -7,11 +7,11 @@ import bcrypt from 'bcryptjs'
 let API_URL = "";
 if (import.meta.env.DEV)
 {
-    API_URL = import.meta.env.VITE_APP_LOCAL_API_URL
+    API_URL = import.meta.env.VITE_APP_LOCAL_API_URL;
 }
 else
 {
-    API_URL = import.meta.env.VITE_APP_API_URL
+    API_URL = import.meta.env.VITE_APP_API_URL;
 }
 
 // fixed salt value for hash
@@ -34,6 +34,12 @@ export const LoginRequest = async (email: string, password: string): Promise<any
             Password: inputPassHash
         }
         const response = await Ajax.post(url, data);
+
+        if (!response.ok)
+        {
+            console.error(`Server responded with HTTP error: ${response.status}`)
+        }
+
         return response;
     }
     catch (error: any)
@@ -62,6 +68,12 @@ export const RegisterRequest = async(firstName: string, lastName: string, email:
 
         const url = API_URL + "api/register/"
         const response = await Ajax.post(url, newUser);
+
+        if (!response.ok)
+        {
+            console.error(`Server responded with HTTP error: ${response.status}`)
+        }
+
         return response;
     } 
     catch (error: any) 
