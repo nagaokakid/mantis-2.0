@@ -3,8 +3,16 @@ import {Ajax} from './Ajax'
 import * as DTO from '../data/DTO'
 import bcrypt from 'bcryptjs'
 
-// url for api connection
-const API_URL = import.meta.env.VITE_APP_API_URL;
+// use localhost url if in dev mode OR use cloud url if in deployment mode
+let API_URL = "";
+if (import.meta.env.DEV)
+{
+    API_URL = import.meta.env.VITE_APP_LOCAL_API_URL
+}
+else
+{
+    API_URL = import.meta.env.VITE_APP_API_URL
+}
 
 // fixed salt value for hash
 const SALT = import.meta.env.VITE_APP_FIXED_SALT || "";

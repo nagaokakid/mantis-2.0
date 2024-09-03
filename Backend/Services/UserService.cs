@@ -37,7 +37,7 @@ namespace Backend.Services
             var matchedUser = users.Where(u => u.Email == email);
             if (matchedUser.Any())
             {
-                return await matchedUser.SingleAsync();
+                return await matchedUser.FirstAsync();
             }
             return null;
         }
