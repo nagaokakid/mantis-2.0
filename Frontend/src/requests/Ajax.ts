@@ -10,16 +10,19 @@ export class Ajax
                 headers: customHeaders
             })
 
+            const msg = await response.text();
+
             if (!response.ok)
             {
-                throw new Error(`Server responded with HTTP error: ${response.status}`);
+                console.error(`Server responded with HTTP error code: [${response.status}]\nMessage: "${msg}"`);
             }
-
-            return await response.json();
+            
+            return response;
         }
         catch (error: any)
         {
-            throw new Error(`GET request failed. ${error.message}`);
+            console.error("GET request failed.");
+            throw error;
         }
     }
 
@@ -37,23 +40,27 @@ export class Ajax
                 body: JSON.stringify(data)
             })
 
+            const msg = await response.text();
+
             if (!response.ok)
             {
-                throw new Error(`Server responded with HTTP error: ${response.status}`);
+                console.error(`Server responded with HTTP error code: [${response.status}]\nMessage: "${msg}"`);
             }
 
-            return await response.json();
+            return response;
         } 
         catch (error: any) 
         {
-            throw new Error(`POST request failed. ${error.message}`);
+            console.error("POST request failed.");
+            throw error;
         }
     }
 
     // PUT request
     static async put(url: string, data: object, customHeaders?: HeadersInit): Promise<any>
     {
-        try {
+        try 
+        {
             const response = await fetch(url, {
                 method: 'PUT',
                 headers: {
@@ -63,15 +70,19 @@ export class Ajax
                 body: JSON.stringify(data)
             })
 
+            const msg = await response.text();
+
             if (!response.ok)
             {
-                throw new Error(`Server responded with HTTP error: ${response.status}`);
+                console.error(`Server responded with HTTP error code: [${response.status}]\nMessage: "${msg}"`);
             }
 
-            return await response.json();
+            return response;
         } 
-        catch (error: any) {
-            throw new Error(`PUT request failed. ${error.message}`);
+        catch (error: any) 
+        {
+            console.error("PUT request failed.");
+            throw error;
         }
     }
 
@@ -84,15 +95,18 @@ export class Ajax
                 headers: customHeaders
             })
 
+            const msg = await response.text();
+
             if (!response.ok)
             {
-                throw new Error(`Server responded with HTTP error: ${response.status}`);
+                console.error(`Server responded with HTTP error code: [${response.status}]\nMessage: "${msg}"`);
             }
 
-            return await response.json();
+            return response;
         } 
         catch (error: any) {
-            throw new Error(`DELETE request failed. ${error.message}`);
+            console.error("DELETE request failed.")
+            throw error;
         }
     }
 }

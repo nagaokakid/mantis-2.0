@@ -37,7 +37,7 @@ namespace Backend.Controllers
                         LastName = userRegisterInfo.LastName,
                         Email = userRegisterInfo.Email,
                         Password = userRegisterInfo.Password,
-                        UserName = userRegisterInfo.FirstName[0] + userRegisterInfo.LastName[0] + "#" + randomNum.ToString(),
+                        UserName = userRegisterInfo.FirstName + "_" + userRegisterInfo.LastName + "_" + randomNum.ToString(),
                         EmailConfirmed = false
                     };
                     await _userService.CreateUser(newUser);
