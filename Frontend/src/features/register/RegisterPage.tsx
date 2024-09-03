@@ -72,7 +72,7 @@ const RegisterPage = () => {
     setIsStatusOk(true);
 
     return (
-      <div>
+      <div className="modal">
         <div className="modal-box">
           <form method="dialog"/>
           <h3 className="font-bold text-lg">Registration successful!</h3>
