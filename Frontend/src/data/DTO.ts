@@ -6,12 +6,12 @@ export interface UserLoginInfo
 
 export interface SuccessfulUserLoginInfo
 {
-    Id: string,
-    FirstName: string,
-    LastName: string,
-    UserName: string,
-    ProjectCount: number,
-    TicketCount: number
+    id: string,
+    firstName: string,
+    lastName: string,
+    userName: string,
+    projectCount: number,
+    ticketCount: number
 }
 
 export interface UserRegisterInfo

@@ -14,18 +14,18 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   // run once when component is mounted
   useEffect(() => {
-    const storedUser = localStorage.getItem('user');
+    const storedUser = localStorage.getItem('user');  // check if user info is already stored
     if (storedUser) {
-      setUser(JSON.parse(storedUser));
+      setUser(JSON.parse(storedUser));  // if stored, change state variable to user info object
     }
   }, []);
 
   // run every time "user" state variable changes
   useEffect(() => {
     if (user) {
-      localStorage.setItem('user', JSON.stringify(user));
+      localStorage.setItem('user', JSON.stringify(user)); // place user info in local storage if assigned to valid type
     } else {
-      localStorage.removeItem('user');
+      localStorage.removeItem('user'); // else, remove from local storage if null
     }
   }, [user]);
 

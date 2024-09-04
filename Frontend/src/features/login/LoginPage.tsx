@@ -48,14 +48,12 @@ const LoginPage = () => {
       return;
     }
 
-    // if context has not been mounted yet, just wait...
+    // if context is still undefined, just wait...
     if (!userContext)
     {
       return (
         <div className="flex items-center justify-center h-screen">
-          <h1 className="text-3xl font-bold">
-            Loading...
-          </h1>
+          <span className="loading loading-spinner loading-lg"></span>
         </div>
       )
     }
