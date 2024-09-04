@@ -1,9 +1,10 @@
-import { ChangeEvent, FormEvent, useState } from "react"
+import { ChangeEvent, FormEvent, useContext, useState } from "react"
 import LogoImage from "../../assets/mantis_logo.png"
 import { Link } from "react-router-dom"
 import { LoginRequest } from "../../requests/ApiRequestHandler"
-import { useUserContext } from "../../contexts/UserContext"
+import { UserContext } from "../../contexts/UserContext"
 import { useNavigate } from "react-router-dom"
+import { SuccessfulUserLoginInfo } from "../../data/DTO"
 
 const LoginPage = () => {
 
@@ -11,7 +12,7 @@ const LoginPage = () => {
   const [password, setPassword] = useState<string>("");
   const [isValidCredentials, setIsValidCredentials] = useState(true);
   const [isStatusOk, setIsStatusOk] = useState(true);
-  const {setUser} = useUserContext();
+  const userContext = useContext(UserContext);
 
   const navigate = useNavigate();
 
@@ -47,10 +48,28 @@ const LoginPage = () => {
       return;
     }
 
+    // if context has not been mounted yet, just wait...
+    if (!userContext)
+    {
+      return (
+        <div className="flex items-center justify-center h-screen">
+          <h1 className="text-3xl font-bold">
+            Loading...
+          </h1>
+        </div>
+      )
+    }
+
     // login is successful at this point...
-    const userData = response.json();
-    setUser(userData);
-    navigate("/home");
+    const userData: SuccessfulUserLoginInfo = await response.json();  // grab user info returned from server
+    const {setUser} = userContext;  // set f'n for user context
+
+    if (setUser)
+    {
+      setUser(userData); // place user info into user context state variable; for use across the app
+    }
+
+    navigate("/home");  // go to home page
   }
 
   const closeErrorModal = () =>

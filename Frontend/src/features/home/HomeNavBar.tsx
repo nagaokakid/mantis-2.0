@@ -40,23 +40,23 @@ const HomeNavBar = () => {
   return (
     <div className="navbar min-w-full bg-neutral-200 p-0">
      
-        <div className="flex mr-20 ml-4">
+        <div className="flex items-center ml-4 mr-8">
           <img src={LogoImage} className="w-10" alt="Mantis Logo" />
           <a className="text-xl text-emerald-600 ml-2">MANTIS</a>
         </div>
 
-        <div className="flex flex-grow space-x-8">
+        <div className="flex-grow mx-8">
+          <input type="search" placeholder="Search" className="flex input input-bordered h-10" />
+        </div>
+
+        <div className="flex space-x-8 ml-auto mr-8">
           <MenuItem label="Dashboard" iconName={dashboardIcon} onClick={() => { handleIconClick("Dashboard") }} selected={selectedItem === "Dashboard"} />
           <MenuItem label="Projects" iconName={projectIcon} onClick={() => { handleIconClick("Projects") }} selected={selectedItem === "Projects"} />
           <MenuItem label="Tickets" iconName={ticketIcon} onClick={() => { handleIconClick("Tickets") }} selected={selectedItem === "Tickets"} />
           <MenuItem label="Schedule" iconName={scheduleIcon} onClick={() => { handleIconClick("Schedule") }} selected={selectedItem === "Schedule"} />
         </div>
-      
-        <div className="flex form-control">
-          <input type="search" placeholder="Search" className="flex input input-bordered h-10" />
-        </div>
      
-      <div className="flex ml-8 mr-4 space-x-4 text-xl">
+      <div className="flex mx-4 text-xl">
         <FontAwesomeIcon icon={profileIcon}></FontAwesomeIcon>
       </div>
 
