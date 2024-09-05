@@ -9,7 +9,8 @@ import {faUser as profileIcon,
   // faRightFromBracket as signoutIcon,
   IconDefinition} 
   from '@fortawesome/free-solid-svg-icons';
-import {MenuItemContext} from '../../contexts/MenuItemContext';
+import { useMenuItemContext } from '../../contexts/MenuItemContext';
+import { useNavigate } from "react-router-dom";
 
 interface MenuItemProps {
   label: string,
@@ -28,13 +29,15 @@ const MenuItem: React.FC<MenuItemProps> = ({label, iconName, onClick, selected})
   </div>
 )
 
-const HomeNavBar = () => {
+const NavBar = () => {
 
-  const {selectedItem, setSelectedItem} = useContext(MenuItemContext);
+  const {selectedItem, setSelectedItem} = useMenuItemContext();
+  const navigate = useNavigate();
 
   const handleIconClick = (iconName: string) : undefined =>
   {
     setSelectedItem(iconName);
+    navigate(`/home/${iconName}`);
   };
 
   return (
@@ -50,10 +53,10 @@ const HomeNavBar = () => {
         </div>
 
         <div className="flex space-x-8 ml-auto mr-8">
-          <MenuItem label="Dashboard" iconName={dashboardIcon} onClick={() => { handleIconClick("Dashboard") }} selected={selectedItem === "Dashboard"} />
-          <MenuItem label="Projects" iconName={projectIcon} onClick={() => { handleIconClick("Projects") }} selected={selectedItem === "Projects"} />
-          <MenuItem label="Tickets" iconName={ticketIcon} onClick={() => { handleIconClick("Tickets") }} selected={selectedItem === "Tickets"} />
-          <MenuItem label="Schedule" iconName={scheduleIcon} onClick={() => { handleIconClick("Schedule") }} selected={selectedItem === "Schedule"} />
+          <MenuItem label="Dashboard" iconName={dashboardIcon} onClick={() => { handleIconClick("dashboard") }} selected={selectedItem === "dashboard"} />
+          <MenuItem label="Projects" iconName={projectIcon} onClick={() => { handleIconClick("projects") }} selected={selectedItem === "projects"} />
+          <MenuItem label="Tickets" iconName={ticketIcon} onClick={() => { handleIconClick("tickets") }} selected={selectedItem === "tickets"} />
+          <MenuItem label="Schedule" iconName={scheduleIcon} onClick={() => { handleIconClick("schedule") }} selected={selectedItem === "schedule"} />
         </div>
      
       <div className="flex mx-4 text-xl">
@@ -66,4 +69,4 @@ const HomeNavBar = () => {
 
 }
 
-export default HomeNavBar
+export default NavBar

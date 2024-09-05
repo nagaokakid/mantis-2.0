@@ -67,7 +67,7 @@ const LoginPage = () => {
       setUser(userData); // place user info into user context state variable; for use across the app
     }
 
-    navigate("/home");  // go to home page
+    navigate("/home/dashboard");  // go to home page
   }
 
   const closeErrorModal = () =>
