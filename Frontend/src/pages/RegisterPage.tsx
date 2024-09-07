@@ -1,8 +1,8 @@
 import { ChangeEvent, FormEvent, useState } from "react";
-import LogoImage from "../../assets/mantis_logo.png"
+import LogoImage from "../assets/mantis_logo.png"
 import { Link } from "react-router-dom"
 import validator from "validator"
-import { RegisterRequest } from "../../requests/ApiRequestHandler";
+import { RegisterRequest } from "../requests/ApiRequestHandler";
 
 const RegisterPage = () => {
 

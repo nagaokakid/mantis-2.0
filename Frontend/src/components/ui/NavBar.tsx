@@ -1,5 +1,4 @@
 import LogoImage from "../../assets/mantis_logo.png"
-import {useContext} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faUser as profileIcon, 
   faGauge as dashboardIcon, 
@@ -59,7 +58,7 @@ const NavBar = () => {
           <MenuItem label="Schedule" iconName={scheduleIcon} onClick={() => { handleIconClick("schedule") }} selected={selectedItem === "schedule"} />
         </div>
      
-      <div className="flex mx-4 text-xl">
+      <div className="flex ml-4 mr-8 text-xl">
         <FontAwesomeIcon icon={profileIcon}></FontAwesomeIcon>
       </div>
 

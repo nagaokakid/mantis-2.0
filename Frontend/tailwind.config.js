@@ -8,6 +8,9 @@ export default {
     extend: {
       fontFamily: {
         sans: ['Manrope', 'Helvetica', 'Arial', 'sans-serif']
+      },
+      colors: {
+        "buttonHover": "#22C55E"
       }
     },
   },

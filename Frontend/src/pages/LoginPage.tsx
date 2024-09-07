@@ -1,10 +1,10 @@
 import { ChangeEvent, FormEvent, useContext, useState } from "react"
-import LogoImage from "../../assets/mantis_logo.png"
+import LogoImage from "../assets/mantis_logo.png"
 import { Link } from "react-router-dom"
-import { LoginRequest } from "../../requests/ApiRequestHandler"
-import { UserContext } from "../../contexts/UserContext"
+import { LoginRequest } from "../requests/ApiRequestHandler"
+import { UserContext } from "../contexts/UserContext"
 import { useNavigate } from "react-router-dom"
-import { SuccessfulUserLoginInfo } from "../../data/DTO"
+import { SuccessfulUserLoginInfo } from "../data/DTO"
 
 const LoginPage = () => {
 
