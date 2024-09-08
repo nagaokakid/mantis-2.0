@@ -9,13 +9,6 @@ export class Ajax
                 method: 'GET',
                 headers: customHeaders
             })
-
-            const msg = await response.text();
-
-            if (!response.ok)
-            {
-                console.error(`Server responded with HTTP error code: [${response.status}]\nMessage: "${msg}"`);
-            }
             
             return response;
         }
@@ -40,13 +33,6 @@ export class Ajax
                 body: JSON.stringify(data)
             })
 
-            const msg = await response.text();
-
-            if (!response.ok)
-            {
-                console.error(`Server responded with HTTP error code: [${response.status}]\nMessage: "${msg}"`);
-            }
-
             return response;
         } 
         catch (error: any) 
@@ -70,13 +56,6 @@ export class Ajax
                 body: JSON.stringify(data)
             })
 
-            const msg = await response.text();
-
-            if (!response.ok)
-            {
-                console.error(`Server responded with HTTP error code: [${response.status}]\nMessage: "${msg}"`);
-            }
-
             return response;
         } 
         catch (error: any) 
@@ -94,13 +73,6 @@ export class Ajax
                 method: 'DELETE',
                 headers: customHeaders
             })
-
-            const msg = await response.text();
-
-            if (!response.ok)
-            {
-                console.error(`Server responded with HTTP error code: [${response.status}]\nMessage: "${msg}"`);
-            }
 
             return response;
         } 

@@ -5,7 +5,15 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: ['Manrope', 'Helvetica', 'Arial', 'sans-serif']
+      },
+      colors: {
+        "logoText": "#4ebf76",
+        "customGreen": "#0A0"
+      }
+    },
   },
   plugins: [require("daisyui")],
 }

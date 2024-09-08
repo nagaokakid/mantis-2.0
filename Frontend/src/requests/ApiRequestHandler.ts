@@ -3,8 +3,16 @@ import {Ajax} from './Ajax'
 import * as DTO from '../data/DTO'
 import bcrypt from 'bcryptjs'
 
-// url for api connection
-const API_URL = import.meta.env.VITE_APP_API_URL;
+// use localhost url if in dev mode OR use cloud url if in deployment mode
+let API_URL = "";
+if (import.meta.env.DEV)
+{
+    API_URL = import.meta.env.VITE_APP_LOCAL_API_URL;
+}
+else
+{
+    API_URL = import.meta.env.VITE_APP_API_URL;
+}
 
 // fixed salt value for hash
 const SALT = import.meta.env.VITE_APP_FIXED_SALT || "";
@@ -26,6 +34,12 @@ export const LoginRequest = async (email: string, password: string): Promise<any
             Password: inputPassHash
         }
         const response = await Ajax.post(url, data);
+
+        if (!response.ok)
+        {
+            console.error(`Server responded with HTTP error: ${response.status}`)
+        }
+
         return response;
     }
     catch (error: any)
@@ -54,6 +68,12 @@ export const RegisterRequest = async(firstName: string, lastName: string, email:
 
         const url = API_URL + "api/register/"
         const response = await Ajax.post(url, newUser);
+
+        if (!response.ok)
+        {
+            console.error(`Server responded with HTTP error: ${response.status}`)
+        }
+
         return response;
     } 
     catch (error: any) 

@@ -6,6 +6,7 @@ namespace Backend.Data.Model
     // 1-to-M relationship btwn project and ticket table
     public class Ticket
     {
+
         [Key]
         public string Id {  get; set; }
 
@@ -17,8 +18,10 @@ namespace Backend.Data.Model
         public Project Project {  get; set; }
 
         [Required]
+        [MaxLength (100)]
         public string Title { get; set; }
 
+        [MaxLength (500)]
         public string Description { get; set; }
 
         [Required]
@@ -27,11 +30,16 @@ namespace Backend.Data.Model
         public DateTime EndDate {  get; set; }
 
         [Required]
+        public string Status { get; set; }
+
+        [Required]
         public string Priority { get; set; }
 
+        [Required]
         public string Difficulty {  get; set; }
-        
-        // file path OR location property?
+
+        [Required]
+        public Boolean isCompleted { get; set; }
 
 
     }

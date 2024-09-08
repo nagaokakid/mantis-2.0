@@ -34,17 +34,28 @@ namespace Backend.Controllers
                 var user = await _userService.GetUserByEmail(userLoginInfo.Email);
                 if (user == null)
                 {
-                    return Unauthorized("Incorrect email");
+                    return Unauthorized();
                 }
             
                 var hashPass = user.Password;
                 if (hashPass == userLoginInfo.Password)
                 {
-                    return Ok();
+                    int projectCount = _userService.GetProjectCount(user.Id);
+                    int ticketCount = _userService.GetTicketCount(user.Id);
+                    var successfulUserLoginInfo = new SuccessfulUserLoginInfo()
+                    {
+                        Id = user.Id,
+                        FirstName = user.FirstName,
+                        LastName = user.LastName,
+                        UserName = user.UserName,
+                        ProjectCount = projectCount,
+                        TicketCount = ticketCount
+                    };
+                    return Ok(successfulUserLoginInfo);
                 }
                 else
                 {
-                    return Unauthorized("Incorrect password");
+                    return Unauthorized();
                 }
             }
             catch (Exception ex)

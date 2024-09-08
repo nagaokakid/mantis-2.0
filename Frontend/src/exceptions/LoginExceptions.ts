@@ -7,13 +7,3 @@ export class HashSaltException extends Error
         super(msg);
     }
 }
-
-// For when user gives incorrect email and/or password
-export class FailedLoginException extends Error
-{
-    status: number = 401;
-    constructor(msg: string)
-    {
-        super(`${msg}. Please try again.`);
-    }
-}

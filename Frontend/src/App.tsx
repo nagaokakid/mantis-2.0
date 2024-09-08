@@ -1,21 +1,40 @@
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
-import LoginPage from './features/login/LoginPage';
-import RegisterPage from "./features/register/RegisterPage";
-import HomeContent from './features/home/HomeContent';
-import ProjectContext from './contexts/ProjectContext';
+import LoginPage from './pages/LoginPage';
+import RegisterPage from "./pages/RegisterPage";
+import DashboardPage from './pages/DashboardPage';
+import { UserProvider } from './contexts/UserContext';
+import NavBarLayout from './components/layout/NavBarLayout';
+import ProjectsPage from './pages/ProjectsPage';
+import { MenuItemProvider } from './contexts/MenuItemContext';
+import TicketsPage from './pages/TicketsPage';
 
 function App() {
   return (
-
+    <UserProvider>
+      <MenuItemProvider>
       <Router>
         <Routes>
+          {/* Before user login */}
           <Route path="/" element={<LoginPage/>} />
           <Route path="/login" element={<LoginPage/>} />
           <Route path="/register" element={<RegisterPage/>} />
-          <Route path="/home" element={<HomeContent/>} />
-          <Route path="/projects" element={<ProjectContext/>} />
+          
+          
+            {/* After user login; home subroutes*/}
+            <Route path="/home" element={<NavBarLayout/>}>
+              <Route index element={<DashboardPage/>}/>
+              <Route path="dashboard" element={<DashboardPage/>}/>
+              <Route path="projects" element={<ProjectsPage/>}/>
+              <Route path="tickets" element={<TicketsPage/>}/>
+              <Route path="schedule"/>
+              <Route path="profile"/>
+              <Route path="settings"/>
+            </Route>
+
         </Routes>
       </Router>
+      </MenuItemProvider>
+    </UserProvider>
   )
 }
 
