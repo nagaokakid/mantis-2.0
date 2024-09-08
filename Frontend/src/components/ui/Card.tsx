@@ -23,7 +23,7 @@ const Card: React.FC<CardProps> = ({title, bodyText, imgSrc, linkText, linkRoute
             <div className="flex flex-row items-center">
                 <h2 className="w-full card-title">{title}</h2>
                 {createButton &&
-                <button onClick={createButtonAction} className="flex items-center justify-end rounded-full p-2 hover:bg-buttonHover hover:text-white">
+                <button onClick={createButtonAction} className="flex items-center justify-end rounded-full p-2 hover:bg-customGreen hover:text-white">
                     <FontAwesomeIcon icon={faPlus} className=""/>
                 </button>
                 }

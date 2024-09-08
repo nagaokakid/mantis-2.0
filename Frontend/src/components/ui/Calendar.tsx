@@ -17,7 +17,7 @@ const Calendar = () => {
   useEffect(() => {
     const days = calculateDaysInMonth(today.getMonth(), currentYear);
     setDaysInMonth(days);
-  }, [currentYear, today]);
+  }, []);
 
   return (
     <div className="flex flex-col items-center justify-center p-4 bg-white rounded-lg shadow-lg">

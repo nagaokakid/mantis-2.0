@@ -10,7 +10,8 @@ export default {
         sans: ['Manrope', 'Helvetica', 'Arial', 'sans-serif']
       },
       colors: {
-        "buttonHover": "#22C55E"
+        "logoText": "#4ebf76",
+        "customGreen": "#0A0"
       }
     },
   },

@@ -6,30 +6,6 @@ namespace Backend.Data.Model
     // 1-to-M relationship btwn project and ticket table
     public class Ticket
     {
-        public enum TicketStatus
-        {
-            New,
-            Open,
-            InProgress,
-            Resolved,
-            Closed
-        }
-
-        public enum TicketDifficulty
-        {
-            Easy,
-            Moderate,
-            Difficult,
-            VeryDifficult
-        }
-
-        public enum TicketPriority
-        {
-            Low,
-            Medium,
-            High,
-            VeryHigh
-        }
 
         [Key]
         public string Id {  get; set; }
@@ -54,14 +30,15 @@ namespace Backend.Data.Model
         public DateTime EndDate {  get; set; }
 
         [Required]
-        public TicketStatus Status { get; set; }
+        public string Status { get; set; }
 
         [Required]
-        public TicketPriority Priority { get; set; }
+        public string Priority { get; set; }
 
         [Required]
-        public TicketDifficulty Difficulty {  get; set; }
-        
+        public string Difficulty {  get; set; }
+
+        [Required]
         public Boolean isCompleted { get; set; }
 
 

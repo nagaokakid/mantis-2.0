@@ -20,7 +20,7 @@ interface MenuItemProps {
 
 const MenuItem: React.FC<MenuItemProps> = ({label, iconName, onClick, selected}) => (
   <div className={`flex items-center hover:cursor-pointer space-x-2 p-2 text-sm 
-  ${selected ? "bg-green-500 rounded text-gray-100 scale-110" : 
+  ${selected ? "bg-customGreen rounded text-gray-100 scale-110" : 
   "hover:bg-gray-300 rounded transition duration-300 ease-in-out transform hover:scale-110"}`}
   onClick={onClick}>
     <FontAwesomeIcon icon={iconName}/>
@@ -44,7 +44,7 @@ const NavBar = () => {
      
         <div className="flex items-center ml-4 mr-8">
           <img src={LogoImage} className="w-10" alt="Mantis Logo" />
-          <a className="text-xl text-emerald-700 ml-2">MANTIS</a>
+          <a className="text-xl text-logoText ml-2">MANTIS</a>
         </div>
 
         <div className="flex-grow mx-8">

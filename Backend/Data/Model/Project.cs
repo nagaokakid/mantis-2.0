@@ -3,14 +3,6 @@
 namespace Backend.Data.Model
 {
 
-    public enum ProjectStatus{
-        NotStarted,
-        InProgress,
-        OnHold,
-        Completed,
-        Canceled
-    }
-
     public class Project
     {
         [Key]
@@ -29,8 +21,9 @@ namespace Backend.Data.Model
         public DateTime? EndDate {  get; set; }
         
         [Required]
-        public ProjectStatus Status { get; set; }
+        public string Status { get; set; }
 
+        [Required]
         public Boolean isCompleted {  get; set; }
 
     }
