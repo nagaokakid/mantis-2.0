@@ -1,7 +1,7 @@
 import { useMenuItemContext } from "../contexts/MenuItemContext"
 
 const ProjectsPage = () => {
-  const {selectedItem, setSelectedItem} = useMenuItemContext();
+  const {setSelectedItem} = useMenuItemContext();
 
   setSelectedItem("projects");
 
