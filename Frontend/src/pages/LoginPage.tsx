@@ -128,7 +128,7 @@ const LoginPage = () => {
           <p className="text-red-600 mb-8 text-center">Incorrect email and/or password</p>
         </div>)}
         <div className="flex items-center justify-center">
-          <button className="bg-green-600 hover:bg-green-500 text-white text-xl text-center w-2/3 py-4 px-6 rounded focus:outline-none focus:shadow-outline">
+          <button className="bg-customGreen hover:bg-buttonHover text-white text-xl text-center w-2/3 py-4 px-6 rounded focus:outline-none focus:shadow-outline">
             LOGIN
           </button>
         </div>

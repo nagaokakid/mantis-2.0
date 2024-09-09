@@ -1,5 +1,8 @@
 export class Ajax
 {
+    static defaultHeaders: HeadersInit = {
+        'Access-Control-Allow-Origin': '*',
+    }
     // GET request
     static async get(url: string, customHeaders?: HeadersInit): Promise<any>
     {
@@ -7,7 +10,10 @@ export class Ajax
         {
             const response = await fetch(url, {
                 method: 'GET',
-                headers: customHeaders
+                headers: {
+                    ...this.defaultHeaders,
+                    ...customHeaders
+                }
             })
             
             return response;
@@ -28,6 +34,7 @@ export class Ajax
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    ...this.defaultHeaders,
                     ...customHeaders
                 },
                 body: JSON.stringify(data)
@@ -51,6 +58,7 @@ export class Ajax
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
+                    ...this.defaultHeaders,
                     ...customHeaders
                 },
                 body: JSON.stringify(data)
@@ -71,7 +79,10 @@ export class Ajax
         try {
             const response = await fetch(url, {
                 method: 'DELETE',
-                headers: customHeaders
+                headers: {
+                    ...this.defaultHeaders,
+                    ...customHeaders
+                }
             })
 
             return response;

@@ -219,7 +219,7 @@ const RegisterPage = () => {
             )}
         </div>
         <div className="flex items-center justify-center">
-          <button type="submit" disabled={isRegistering} className="bg-green-600 hover:bg-green-500 text-white text-xl text-center 
+          <button type="submit" disabled={isRegistering} className="bg-customGreen hover:bg-buttonHover text-white text-xl text-center 
           w-2/3 py-4 px-6 rounded focus:outline-none focus:shadow-outline">
             SIGN UP
           </button>

@@ -1,4 +1,3 @@
-import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom'
@@ -13,7 +12,9 @@ interface CardProps {
     createButtonAction?: () => void
 }
 
-const Card: React.FC<CardProps> = ({title, bodyText, imgSrc, linkText, linkRoute, createButton, createButtonAction}) => (
+const Card: React.FC<CardProps> = ({title, bodyText, imgSrc, linkText, linkRoute, createButton, createButtonAction}) => {
+       
+       return (
        <div className="flex">
        <div className={`card card-compact bg-base-100 w-80 h-fit shadow-lg`}>
         <figure>
@@ -35,6 +36,7 @@ const Card: React.FC<CardProps> = ({title, bodyText, imgSrc, linkText, linkRoute
         </div>
       </div>
       </div>
-)
+      )
+}
 
 export default Card

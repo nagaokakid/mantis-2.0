@@ -1,13 +1,26 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { UserContext } from "../contexts/UserContext";
 import {useMenuItemContext} from '../contexts/MenuItemContext';
 import BarGraph from "../components/ui/BarGraph";
 import Card from "../components/ui/Card";
 import Calendar from "../components/ui/Calendar";
+import CreateProjectModal from "../components/ui/CreateProjectModal";
+import { ToastSuccess } from "../components/ui/Toast"
+import { UseToast } from "../hooks/UseToast"
 
 const DashboardPage = () => {
   const userContext = useContext(UserContext);
   const {setSelectedItem} = useMenuItemContext();
+  const [createProjectModal, setCreateProjectModal] = useState(false);
+  const {showToast, message, displayToast} = UseToast();
+
+  const openModal = () => {
+    setCreateProjectModal(true);
+  }
+
+  const closeModal = () => {
+    setCreateProjectModal(false);
+  }
 
   setSelectedItem("dashboard")
 
@@ -27,7 +40,14 @@ const DashboardPage = () => {
 
 
   return (
+    
     <div className="max-w-full space-y-4">
+
+      {createProjectModal && <CreateProjectModal onClose={closeModal} displayToast={displayToast}/>}
+      
+      <div className="fixed bottom-4 right-4 z-50">
+        {showToast && <ToastSuccess message={message}/>}
+      </div>
       
       {/* First Row - greeting */}
       <h1 className="text-xl">{greeting}</h1>
@@ -36,13 +56,15 @@ const DashboardPage = () => {
       <div className="flex flex-row space-x-10">
         <Calendar/>
         <BarGraph/>
-        <div className="flex flex-col space-y-10">
+        <div className="flex flex-col py-8 space-y-10">
           <Card title="Projects" bodyText="Total: " 
           linkText="View All" linkRoute="/home/projects"
-          createButton={true}/>
+          createButton={true}
+          createButtonAction={openModal}/>
           <Card title="Tickets" bodyText="Total: " 
           linkText="View All" linkRoute="/home/tickets"
-          createButton={true}/>
+          createButton={true}
+          />
         </div>
       </div>
 

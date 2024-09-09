@@ -2,6 +2,7 @@ import * as LoginExceptions from '../exceptions/LoginExceptions'
 import {Ajax} from './Ajax'
 import * as DTO from '../data/DTO'
 import bcrypt from 'bcryptjs'
+import IProject from '../data/Project'
 
 // use localhost url if in dev mode OR use cloud url if in deployment mode
 let API_URL = "";
@@ -66,7 +67,7 @@ export const RegisterRequest = async(firstName: string, lastName: string, email:
             Password: inputPassHash
         }
 
-        const url = API_URL + "api/register/"
+        const url = API_URL + "api/register/";
         const response = await Ajax.post(url, newUser);
 
         if (!response.ok)
@@ -79,5 +80,25 @@ export const RegisterRequest = async(firstName: string, lastName: string, email:
     catch (error: any) 
     {
         console.error("Register attempt unsuccessful.", error);
+    }
+}
+
+export const CreateProjectRequest = async(newProject: IProject) =>
+{
+    try 
+    {
+        const url = API_URL + "api/project";
+        const response = await Ajax.post(url, newProject)
+
+        if (!response.ok)
+        {
+            console.error(`Server responded with HTTP error: ${response.status}`)
+        }
+
+        return response;
+    } 
+    catch (error: any) 
+    {
+        console.error("Create project attempt unsuccessful.", error);
     }
 }
