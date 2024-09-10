@@ -67,6 +67,12 @@ namespace Backend.Controllers
             {
                 var newProject = newProjectInfo.Project;
                 string userId = newProjectInfo.UserId;
+                
+                if (newProject == null || userId == null)
+                {
+                    return BadRequest("Project and/or userId are undefined. Please check user context in client-side code.");
+                }
+
                 string projectId = Guid.NewGuid().ToString();
 
                 newProject.Id = projectId;

@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../contexts/UserContext";
 import {useMenuItemContext} from '../contexts/MenuItemContext';
 import BarGraph from "../components/ui/BarGraph";
@@ -7,6 +7,7 @@ import Calendar from "../components/ui/Calendar";
 import CreateProjectModal from "../components/ui/CreateProjectModal";
 import { ToastSuccess } from "../components/ui/Toast"
 import { UseToast } from "../hooks/UseToast"
+import LoadingWheel from "../components/ui/LoadingWheel";
 
 const DashboardPage = () => {
   const userContext = useContext(UserContext);
@@ -22,14 +23,14 @@ const DashboardPage = () => {
     setCreateProjectModal(false);
   }
 
-  setSelectedItem("dashboard")
+  useEffect(() => {
+    setSelectedItem("dashboard")
+  }, []);
 
   // If user context info is null or undefined, show a loading spinner
   if (!userContext) {
     return (
-      <div className="flex items-center justify-center h-screen">
-        <span className="loading loading-spinner loading-lg"></span>
-      </div>
+      <LoadingWheel/>
     );
   }
 

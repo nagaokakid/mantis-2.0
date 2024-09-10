@@ -16,7 +16,7 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
   useEffect(() => {
     const storedUser = localStorage.getItem('user');  // check if user info is already stored
     if (storedUser) {
-      setUser(JSON.parse(storedUser));  // if stored, change state variable to user info object
+      setUser(JSON.parse(storedUser));  // if stored, change state variable to match local storage object
     }
   }, []);
 

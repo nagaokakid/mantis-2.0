@@ -5,6 +5,7 @@ import { LoginRequest } from "../requests/ApiRequestHandler"
 import { UserContext } from "../contexts/UserContext"
 import { useNavigate } from "react-router-dom"
 import { SuccessfulUserLoginInfo } from "../data/DTO"
+import LoadingWheel from "../components/ui/LoadingWheel"
 
 const LoginPage = () => {
 
@@ -51,22 +52,14 @@ const LoginPage = () => {
     // if context is still undefined, just wait...
     if (!userContext)
     {
-      return (
-        <div className="flex items-center justify-center h-screen">
-          <span className="loading loading-spinner loading-lg"></span>
-        </div>
-      )
+      return (<LoadingWheel/>)
     }
 
     // login is successful at this point...
     const userData: SuccessfulUserLoginInfo = await response.json();  // grab user info returned from server
     const {setUser} = userContext;  // set f'n for user context
-
-    if (setUser)
-    {
-      setUser(userData); // place user info into user context state variable; for use across the app
-    }
-
+    setUser(userData);
+    
     navigate("/home/dashboard");  // go to home page
   }
 

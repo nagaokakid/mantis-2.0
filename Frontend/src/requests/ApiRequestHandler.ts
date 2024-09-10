@@ -102,11 +102,11 @@ export const CreateProjectRequest = async(newProjectInfo: DTO.CreateProjectInfo)
     }
 }
 
-export const GetAllProjectsRequest = async() =>
+export const GetAllUserProjectsRequest = async(userId: string) =>
     {
         try 
         {
-            const url = API_URL + "api/project/";
+            const url = API_URL + "api/userproject/" + userId;
             const response = await Ajax.get(url)
     
             if (!response.ok)

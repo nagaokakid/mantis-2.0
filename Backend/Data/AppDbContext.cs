@@ -38,25 +38,25 @@ namespace Backend.Data
                 .HasOne(up => up.User)
                 .WithMany(u => u.UserProjects)
                 .HasForeignKey(up => up.UserId)
-                .OnDelete(DeleteBehavior.Cascade); // Set cascade delete
+                .OnDelete(DeleteBehavior.Cascade); // deleting a user deletes all associated records in UserProject
 
             modelBuilder.Entity<UserProject>() // project for userproject
                 .HasOne(up => up.Project)
                 .WithMany(p => p.UserProjects)
                 .HasForeignKey(up => up.ProjectId)
-                .OnDelete(DeleteBehavior.Cascade); // Set cascade delete
+                .OnDelete(DeleteBehavior.Cascade); // deleting a project deletes all associated records in UserProject
 
             modelBuilder.Entity<UserTicket>() // user for userticket
                 .HasOne(up => up.User)
                 .WithMany(t => t.UserTickets)
                 .HasForeignKey(up => up.UserId)
-                .OnDelete(DeleteBehavior.Cascade); // set cascade delete
+                .OnDelete(DeleteBehavior.Cascade); // deleting a user deletes all associated records in UserTicket
 
             modelBuilder.Entity<UserTicket>() // ticket for userticket
                 .HasOne(up => up.Ticket)
                 .WithMany(t => t.UserTickets)
                 .HasForeignKey(up => up.TicketId)
-                .OnDelete(DeleteBehavior.Cascade); // set cascade delete
+                .OnDelete(DeleteBehavior.Cascade); // deleting a ticket deletes all associated records in UserTicket
         }
     }
 }
