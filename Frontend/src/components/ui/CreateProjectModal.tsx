@@ -1,8 +1,9 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import {Modal, Button, Label, TextInput, Select} from "flowbite-react"
 import IProject from "../../data/Project"
 import { CreateProjectRequest } from "../../requests/ApiRequestHandler"
 import { CreateProjectInfo } from "../../data/DTO"
+import { UserContext } from "../../contexts/UserContext"
 
 interface CreateProjectModalProps {
   onClose: () => void, // Define the onClose prop as a function
@@ -13,6 +14,8 @@ const CreateProjectModal: React.FC<CreateProjectModalProps> = ({onClose, display
 
   const MAX_TITLE_LENGTH = 100;
   const MAX_DESC_LENGTH = 500;
+
+  const userData = useContext(UserContext)?.user; 
 
   const startProject: IProject = {
     id: "",
@@ -25,7 +28,7 @@ const CreateProjectModal: React.FC<CreateProjectModalProps> = ({onClose, display
   }
 
   const [formData, setFormData] = useState<CreateProjectInfo>({
-    UserId: "",
+    UserId: userData?.id,
     Project: startProject
   });
 

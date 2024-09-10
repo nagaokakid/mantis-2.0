@@ -26,6 +26,6 @@ export interface UserRegisterInfo
 
 export interface CreateProjectInfo
 {
-    UserId: string,
+    UserId: string | undefined,
     Project: IProject
 }

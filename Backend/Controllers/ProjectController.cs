@@ -15,11 +15,13 @@ namespace Backend.Controllers
     {
         private readonly ProjectService _projectService;
         private readonly UserService _userService;
+        private readonly UserProjectService _userProjectService;
 
         public ProjectController(AppDbContext context)
         {
             _projectService = new ProjectService(context);
             _userService = new UserService(context);
+            _userProjectService = new UserProjectService(context);
         }
 
         // GET: api/project
@@ -65,12 +67,15 @@ namespace Backend.Controllers
             {
                 var newProject = newProjectInfo.Project;
                 string userId = newProjectInfo.UserId;
+                string projectId = Guid.NewGuid().ToString();
 
-                newProject.Id = Guid.NewGuid().ToString();
+                newProject.Id = projectId;
                 newProject.StartDate = newProject.StartDate.ToUniversalTime();
-                var project = await _projectService.CreateProject(newProject);
+                var project = await _projectService.CreateProject(newProject);  // add to project table
+                var projectDto = new ProjectDTO(project);
+                await _userProjectService.AddUserProject(userId, projectId); // add to user project table
 
-                return CreatedAtAction(nameof(Post), project);
+                return CreatedAtAction(nameof(Post), projectDto);  // send DTO back to client
             }
             catch (Exception ex)
             {

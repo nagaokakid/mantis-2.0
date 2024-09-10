@@ -40,15 +40,18 @@ namespace Backend.Services
         // Retrieve all projects belonging to a single user
         public async Task<List<Project>> GetAllUserProjects(string userId)
         {
-            var userProjectsTable = _userProjectsRepo.GetAll();
-            var userProjectIds = userProjectsTable.Where(entry => entry.UserId == userId).ToList();
-            List<Project> projects = new List<Project>();
-            
-            foreach (var listItem in userProjectIds)
-            {
-                var project = await _projectRepo.GetById(listItem.ProjectId);
-                if (project != null) { projects.Add(project); }
-            }
+            // Get all projectIds for the specified userId
+            var userProjectIds = await _userProjectsRepo
+                .GetAll()
+                .Where(entry => entry.UserId == userId)
+                .Select(entry => entry.ProjectId)
+                .ToListAsync();  
+
+            // Get all projects matching the projectIds
+            var projects = await _projectRepo
+                .GetAll()
+                .Where(project => userProjectIds.Contains(project.Id))
+                .ToListAsync();
 
             return projects;
         }
@@ -56,17 +59,20 @@ namespace Backend.Services
         // Retrieve all tickets belonging to a single user
         public async Task<List<Ticket>> GetAllUserTickets(string userId)
         {
-            var userTicketsTable = _userTicketsRepo.GetAll();
-            var userTicketIds = userTicketsTable.Where(entry => entry.UserId == userId).ToList();
-            List<Ticket> tickets = new List<Ticket>();
+            // Get all ticketIds for the specified userId
+            var userTicketIds = await _userTicketsRepo
+                .GetAll()
+                .Where(entry => entry.UserId == userId)
+                .Select(entry => entry.TicketId)
+                .ToListAsync();
 
-            foreach (var listItem in userTicketIds)
-            {
-                var ticket = await _ticketRepo.GetById(listItem.TicketId);
-                if (ticket != null) { tickets.Add(ticket); }
-            }
+            // Get all tickets matching the ticketIds
+            var projects = await _ticketRepo
+                .GetAll()
+                .Where(ticket => userTicketIds.Contains(ticket.Id))
+                .ToListAsync();
 
-            return tickets;
+            return projects;
         }
 
         // Retrieve all comments belonging to a single user
