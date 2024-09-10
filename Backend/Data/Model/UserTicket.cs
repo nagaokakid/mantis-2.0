@@ -6,19 +6,16 @@ namespace Backend.Data.Model
     // M-to-N relationship between User and Ticket table
     public class UserTicket
     {
-        [Key]
-        public string Id {  get; set; }
-
-        // Foreign key
+        // Foreign key (composite)
+        [ForeignKey("User")]
         public string UserId { get; set; }
 
-        // Foreign key
+        // Foreign key (composite)
+        [ForeignKey("Ticket")]
         public string TicketId { get; set; }
 
-        [ForeignKey("UserId")]
+        // Navigation properties for tables
         public User User {  get; set; }
-
-        [ForeignKey("TicketId")]
         public Ticket Ticket {  get; set; }
     }
 }

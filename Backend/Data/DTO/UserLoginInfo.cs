@@ -1,5 +1,6 @@
 ﻿namespace Backend.Data.DTO
 {
+    // Incoming DTO
     public class UserLoginInfo
     {
         public string Email { get; set; }

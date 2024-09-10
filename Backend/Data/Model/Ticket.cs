@@ -11,10 +11,9 @@ namespace Backend.Data.Model
         public string Id {  get; set; }
 
         // Foreign key
-        [Required]
+        [ForeignKey("Project")]
         public string ProjectId {  get; set; }
         
-        [ForeignKey("ProjectId")]
         public Project Project {  get; set; }
 
         [Required]
@@ -41,6 +40,8 @@ namespace Backend.Data.Model
         [Required]
         public Boolean isCompleted { get; set; }
 
+        // Navigation property for many-to-many relationship
+        public ICollection<UserTicket> UserTickets { get; set; } = new List<UserTicket>();
 
     }
 }

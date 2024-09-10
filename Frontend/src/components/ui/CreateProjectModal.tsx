@@ -2,6 +2,7 @@ import { useState } from "react"
 import {Modal, Button, Label, TextInput, Select} from "flowbite-react"
 import IProject from "../../data/Project"
 import { CreateProjectRequest } from "../../requests/ApiRequestHandler"
+import { CreateProjectInfo } from "../../data/DTO"
 
 interface CreateProjectModalProps {
   onClose: () => void, // Define the onClose prop as a function
@@ -13,8 +14,7 @@ const CreateProjectModal: React.FC<CreateProjectModalProps> = ({onClose, display
   const MAX_TITLE_LENGTH = 100;
   const MAX_DESC_LENGTH = 500;
 
-  // const [showModal, setShowModal] = useState(true);
-  const [formData, setFormData] = useState<IProject>({
+  const startProject: IProject = {
     id: "",
     title: "",
     description: "",
@@ -22,14 +22,22 @@ const CreateProjectModal: React.FC<CreateProjectModalProps> = ({onClose, display
     endDate: null,
     status: "New",
     isCompleted: false
+  }
+
+  const [formData, setFormData] = useState<CreateProjectInfo>({
+    UserId: "",
+    Project: startProject
   });
 
   const [isTitleValid, setIsTitleValid] = useState(true);
 
   const updateProject = (prop: keyof IProject, value: any) => {
     setFormData((prevData) => ({
-      ...prevData,
-      [prop]: value
+      ...prevData, // keep user ID intact
+      Project: {
+        ...prevData.Project, // keep previous project details intact
+      [prop]: value         // apply changes to respective property
+      }
     }));
   }
 
@@ -38,17 +46,16 @@ const CreateProjectModal: React.FC<CreateProjectModalProps> = ({onClose, display
     setIsTitleValid(true);
 
     // user must enter a project title
-    if (!formData.title || formData.title.trim().length === 0)
+    if (!formData.Project.title || formData.Project.title.trim().length === 0)
     {
       setIsTitleValid(false);
       return;
     }
 
     // gather project info
-    console.log(formData);
     const response = await CreateProjectRequest(formData);
-    console.log(response)
 
+    // successful project creation
     if (response.ok)
     {
       displayToast("Project created successfully.", 10000);
@@ -81,7 +88,7 @@ const CreateProjectModal: React.FC<CreateProjectModalProps> = ({onClose, display
               <TextInput
                 type="text"
                 placeholder="Enter a title"
-                value={formData.title}
+                value={formData.Project.title}
                 onChange={(event) => updateProject("title", event.target.value)}
                 required
                 maxLength={MAX_TITLE_LENGTH}/>
@@ -95,6 +102,7 @@ const CreateProjectModal: React.FC<CreateProjectModalProps> = ({onClose, display
               </div>
               <textarea rows={3} className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
               placeholder="Enter a description"
+              value={formData.Project.description}
               onChange={(event) => updateProject("description", event.target.value)}
               maxLength={MAX_DESC_LENGTH}>
               </textarea>

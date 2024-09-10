@@ -1,5 +1,6 @@
 ﻿namespace Backend.Data.DTO
 {
+    // Outgoing DTO
     public class SuccessfulUserLoginInfo
     {
         public string Id { get; set; }

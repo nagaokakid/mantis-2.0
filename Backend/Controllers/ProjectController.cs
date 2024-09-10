@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Backend.Data;
 using Backend.Data.Model;
+using Backend.Data.DTO;
 using Backend.Services;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -13,10 +14,12 @@ namespace Backend.Controllers
     public class ProjectController : ControllerBase
     {
         private readonly ProjectService _projectService;
+        private readonly UserService _userService;
 
         public ProjectController(AppDbContext context)
         {
             _projectService = new ProjectService(context);
+            _userService = new UserService(context);
         }
 
         // GET: api/project
@@ -56,13 +59,17 @@ namespace Backend.Controllers
 
         // POST api/project
         [HttpPost]
-        public async Task<ActionResult<Project>> Post([FromBody] Project newProject)
+        public async Task<ActionResult<Project>> Post([FromBody] CreateProjectInfo newProjectInfo)
         {
             try
             {
+                var newProject = newProjectInfo.Project;
+                string userId = newProjectInfo.UserId;
+
                 newProject.Id = Guid.NewGuid().ToString();
                 newProject.StartDate = newProject.StartDate.ToUniversalTime();
                 var project = await _projectService.CreateProject(newProject);
+
                 return CreatedAtAction(nameof(Post), project);
             }
             catch (Exception ex)

@@ -2,7 +2,6 @@ import * as LoginExceptions from '../exceptions/LoginExceptions'
 import {Ajax} from './Ajax'
 import * as DTO from '../data/DTO'
 import bcrypt from 'bcryptjs'
-import IProject from '../data/Project'
 
 // use localhost url if in dev mode OR use cloud url if in deployment mode
 let API_URL = "";
@@ -83,12 +82,12 @@ export const RegisterRequest = async(firstName: string, lastName: string, email:
     }
 }
 
-export const CreateProjectRequest = async(newProject: IProject) =>
+export const CreateProjectRequest = async(newProjectInfo: DTO.CreateProjectInfo) =>
 {
     try 
     {
-        const url = API_URL + "api/project";
-        const response = await Ajax.post(url, newProject)
+        const url = API_URL + "api/project/";
+        const response = await Ajax.post(url, newProjectInfo)
 
         if (!response.ok)
         {
@@ -102,3 +101,23 @@ export const CreateProjectRequest = async(newProject: IProject) =>
         console.error("Create project attempt unsuccessful.", error);
     }
 }
+
+export const GetAllProjectsRequest = async() =>
+    {
+        try 
+        {
+            const url = API_URL + "api/project/";
+            const response = await Ajax.get(url)
+    
+            if (!response.ok)
+            {
+                console.error(`Server responded with HTTP error: ${response.status}`)
+            }
+    
+            return response;
+        } 
+        catch (error: any) 
+        {
+            console.error("Get all projects attempt unsuccessful.", error);
+        }
+    }

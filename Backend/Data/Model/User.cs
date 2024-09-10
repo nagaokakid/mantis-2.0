@@ -24,7 +24,10 @@ namespace Backend.Data.Model
 
         [Required]
         public bool EmailConfirmed { get; set; }
- 
-        
+
+        // Navigation property for the many-to-many relationship
+        public ICollection<UserProject> UserProjects { get; set; } = new List<UserProject>();
+        public ICollection<UserTicket> UserTickets { get; set; } = new List<UserTicket>();
+
     }
 }

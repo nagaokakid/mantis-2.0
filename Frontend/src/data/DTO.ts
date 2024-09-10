@@ -1,3 +1,5 @@
+import IProject from './Project'
+
 export interface UserLoginInfo
 {
     Email: string,
@@ -20,4 +22,10 @@ export interface UserRegisterInfo
     LastName: string,
     Email: string,
     Password: string
+}
+
+export interface CreateProjectInfo
+{
+    UserId: string,
+    Project: IProject
 }

@@ -26,5 +26,8 @@ namespace Backend.Data.Model
         [Required]
         public Boolean isCompleted {  get; set; }
 
+        // Navigation property for the many-to-many relationship
+        public ICollection<UserProject> UserProjects { get; set; } = new List<UserProject>();
+
     }
 }

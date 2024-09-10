@@ -6,19 +6,17 @@ namespace Backend.Data.Model
     // M-to-N relationship between User and Projects table
     public class UserProject
     {
-        [Key]
-        public string Id {  get; set; }
 
-        // Foreign key
+        // Foreign key (composite)
+        [ForeignKey("User")]
         public string UserId {  get; set; }
 
-        // Foreign key
+        // Foreign key (composite)
+        [ForeignKey("Project")]
         public string ProjectId {  get; set; }
 
-        [ForeignKey("UserId")]
+        // Navigation properties for tables
         public User User { get; set; }
-
-        [ForeignKey("ProjectId")]
         public Project Project {  get; set; }
     }
 }
