@@ -118,6 +118,26 @@ export const GetAllUserProjectsRequest = async(userId: string) =>
         } 
         catch (error: any) 
         {
-            console.error("Get all projects attempt unsuccessful.", error);
+            console.error("Get all user projects attempt unsuccessful.", error);
         }
     }
+
+export const GetProjectRequest = async (projectId: string) => {
+    try 
+    {
+        const url = API_URL + "api/project/" + projectId;
+        const response = await Ajax.get(url);
+
+        if (!response.ok)
+        {
+            console.error(`Server responded with HTTP error: ${response.status}`);
+        }
+
+        return response;
+
+    } 
+    catch (error: any) 
+    {
+        console.error("Get project attempt unsuccessful.", error);
+    }
+}

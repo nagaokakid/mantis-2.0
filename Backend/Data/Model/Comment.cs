@@ -28,6 +28,6 @@ namespace Backend.Data.Model
         public string Author {  get; set; }
 
         [Required]
-        public DateTime Date {  get; set; }
+        public DateTime Created {  get; set; }
     }
 }

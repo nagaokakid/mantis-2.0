@@ -1,13 +1,14 @@
 interface Ticket
 {
-    Id: string,
-    ProjectId: string,
-    Title: string,
-    Description: string,
-    StartDate: Date,
-    EndDate: Date,
-    Priority: string,
-    Difficulty: string
+    id: string,
+    projectId: string,
+    title: string,
+    description: string,
+    created: Date,
+    startDate: Date | null,
+    endDate: Date | null,
+    priority: string,
+    difficulty: string
 }
 
 export default Ticket

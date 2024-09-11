@@ -16,8 +16,8 @@ namespace Backend.Data.Model
         public string? Description { get; set; }
 
         [Required]
-        public DateTime StartDate { get; set; }
-
+        public DateTime Created { get; set; }
+        public DateTime? StartDate { get; set; }
         public DateTime? EndDate {  get; set; }
         
         [Required]

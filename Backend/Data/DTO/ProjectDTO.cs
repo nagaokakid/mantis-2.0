@@ -8,7 +8,8 @@ namespace Backend.Data.DTO
         public string Id { get; set; }
         public string Title { get; set; }
         public string? Description { get; set; }
-        public DateTime StartDate { get; set; }
+        public DateTime Created { get; set; }
+        public DateTime? StartDate { get; set; }
         public DateTime? EndDate { get; set; }
         public string Status { get; set; }
         public Boolean isCompleted { get; set; }
@@ -18,6 +19,7 @@ namespace Backend.Data.DTO
             Id = project.Id;
             Title = project.Title;
             Description = project.Description;
+            Created = project.Created;
             StartDate = project.StartDate;
             EndDate = project.EndDate;
             Status = project.Status;

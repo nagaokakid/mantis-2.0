@@ -21,7 +21,7 @@ namespace Backend.Controllers
 
         // GET: api/userproject/GUID
         [HttpGet("{userId}")]
-        public async Task<ActionResult<List<Project>>> Get(string userId)
+        public async Task<ActionResult<List<ProjectDTO>>> Get(string userId)
         {
             try
             {

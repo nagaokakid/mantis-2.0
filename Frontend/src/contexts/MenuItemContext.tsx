@@ -15,7 +15,7 @@ interface MenuItemProviderProps {
 
 // Provider to be wrapped at highest level of App
 export const MenuItemProvider: React.FC<MenuItemProviderProps> = ({ children }) => {
-  const [selectedItem, setSelectedItem] = useState<string>('dashboard'); // Default state
+  const [selectedItem, setSelectedItem] = useState<string>(''); // Default state
 
   return (
     <MenuItemContext.Provider value={{ selectedItem, setSelectedItem }}>

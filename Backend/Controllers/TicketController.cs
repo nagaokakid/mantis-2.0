@@ -61,7 +61,7 @@ namespace Backend.Controllers
             try
             {
                 newTicket.Id = Guid.NewGuid().ToString();
-                newTicket.StartDate = newTicket.StartDate.ToUniversalTime();
+                /*newTicket.StartDate = newTicket.StartDate.ToUniversalTime();*/
                 var ticket = await _ticketService.CreateTicket(newTicket);
                 return CreatedAtAction(nameof(Post), ticket);
             }

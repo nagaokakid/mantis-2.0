@@ -14,7 +14,8 @@ export default {
       colors: {
         "logoText": "#4ebf76",
         "customGreen": "#0A0",
-        "buttonHover": "#03de03"
+        "buttonHover": "#03de03",
+        "tableHover": "#8fff8f"
       }
     },
   },

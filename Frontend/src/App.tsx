@@ -7,6 +7,7 @@ import NavBarLayout from './components/layout/NavBarLayout';
 import ProjectsPage from './pages/ProjectsPage';
 import { MenuItemProvider } from './contexts/MenuItemContext';
 import TicketsPage from './pages/TicketsPage';
+import ProjectDetailsPage from './pages/ProjectDetailsPage';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
               <Route index element={<DashboardPage/>}/>
               <Route path="dashboard" element={<DashboardPage/>}/>
               <Route path="projects" element={<ProjectsPage/>}/>
+              <Route path="projects/:projectId" element={<ProjectDetailsPage/>}/>
               <Route path="tickets" element={<TicketsPage/>}/>
               <Route path="schedule"/>
               <Route path="profile"/>

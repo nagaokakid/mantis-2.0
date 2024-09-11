@@ -4,13 +4,18 @@ import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Toolti
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
+interface BarGraphProps {
+  projectCount: number,
+  ticketCount: number
+}
+
 const BarGraph: React.FC = () => {
   const data = {
     labels: ['Projects', 'Tickets'],  // X-axis labels
     datasets: [
       {
         label: 'Assigned',
-        data: [11, 53],
+        data: [11, 36],
         backgroundColor: '#00CCFF',
         borderColor: '#01ABD5',
         borderWidth: 1,

@@ -21,7 +21,8 @@ const CreateProjectModal: React.FC<CreateProjectModalProps> = ({onClose, display
     id: "",
     title: "",
     description: "",
-    startDate: new Date(),
+    created: new Date(),
+    startDate: null,
     endDate: null,
     status: "New",
     isCompleted: false
@@ -54,6 +55,9 @@ const CreateProjectModal: React.FC<CreateProjectModalProps> = ({onClose, display
       setIsTitleValid(false);
       return;
     }
+
+    // set created date to current time
+    formData.Project.created = new Date();
 
     // gather project info
     const response = await CreateProjectRequest(formData);

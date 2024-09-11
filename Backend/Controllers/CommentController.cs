@@ -61,7 +61,6 @@ namespace Backend.Controllers
             try
             {
                 newComment.Id = Guid.NewGuid().ToString();
-                newComment.Date = newComment.Date.ToUniversalTime();
                 var comment = await _commentService.CreateComment(newComment);
                 return CreatedAtAction(nameof(Post), comment);
             }

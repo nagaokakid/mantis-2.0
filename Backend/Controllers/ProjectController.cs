@@ -26,12 +26,13 @@ namespace Backend.Controllers
 
         // GET: api/project
         [HttpGet]
-        public ActionResult<IQueryable<Project>> Get()
+        public ActionResult<List<ProjectDTO>> Get()
         {
             try
             {
                 var projects = _projectService.GetAllProjects();
-                return Ok(projects);
+                var projectDTOs = projects.Select(project => new ProjectDTO(project)).ToList();
+                return Ok(projectDTOs);
             }
             catch (Exception ex) 
             {
@@ -41,7 +42,7 @@ namespace Backend.Controllers
 
         // GET api/project/GUID
         [HttpGet("{id}")]
-        public async Task<ActionResult<Project>> Get(string id)
+        public async Task<ActionResult<ProjectDTO>> Get(string id)
         {
             try
             {
@@ -50,7 +51,8 @@ namespace Backend.Controllers
                 {
                     return NotFound();
                 }
-                return Ok(project);
+                var projectDTO = new ProjectDTO(project);
+                return Ok(projectDTO);
             }
             catch (Exception ex)
             {
@@ -76,7 +78,7 @@ namespace Backend.Controllers
                 string projectId = Guid.NewGuid().ToString();
 
                 newProject.Id = projectId;
-                newProject.StartDate = newProject.StartDate.ToUniversalTime();
+                /*newProject.StartDate = newProject.StartDate.ToUniversalTime();*/
                 var project = await _projectService.CreateProject(newProject);  // add to project table
                 var projectDto = new ProjectDTO(project);
                 await _userProjectService.AddUserProject(userId, projectId); // add to user project table

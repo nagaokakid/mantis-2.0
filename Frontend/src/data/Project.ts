@@ -3,7 +3,8 @@ interface IProject
     id: string,
     title: string[100],
     description: string[500],
-    startDate: Date,
+    created: Date,
+    startDate: Date | null,
     endDate: Date | null,
     status: string,
     isCompleted: boolean
