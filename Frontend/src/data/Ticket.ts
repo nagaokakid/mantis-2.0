@@ -1,17 +1,22 @@
-interface Ticket
+import IProject from "./Project"
+
+interface ITicket
 {
     id: string,
-    projectId: string,
+    projectId: string | undefined,
+    project: IProject | undefined,
     title: string,
     description: string,
     created: Date,
     startDate: Date | null,
     endDate: Date | null,
+    status: string,
     priority: string,
-    difficulty: string
+    difficulty: string,
+    isCompleted: boolean
 }
 
-export default Ticket
+export default ITicket
 
 /*
         [Key]

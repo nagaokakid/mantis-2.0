@@ -4,10 +4,10 @@ import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Toolti
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-interface BarGraphProps {
-  projectCount: number,
-  ticketCount: number
-}
+// interface BarGraphProps {
+//   projectCount: number,
+//   ticketCount: number
+// }
 
 const BarGraph: React.FC = () => {
   const data = {

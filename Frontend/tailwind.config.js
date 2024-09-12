@@ -13,9 +13,12 @@ export default {
       },
       colors: {
         "logoText": "#4ebf76",
-        "customGreen": "#0A0",
-        "buttonHover": "#03de03",
-        "tableHover": "#8fff8f"
+        "customGreen": "#00AA00",
+        "buttonHover": "#009300",
+        "tableHover": "#c9ffc9",
+        "link": "#1a56db",
+        "ticketButton": "#00babd",
+        "ticketButtonHover": "#01a8ab"
       }
     },
   },

@@ -4,11 +4,11 @@ using System.ComponentModel.DataAnnotations;
 namespace Backend.Data.DTO
 {
     // Incoming DTO
-    public class CreateProjectInfo
+    public class CreateTicketInfo
     {
         [Required]
         public string UserId { get; set; }
         [Required]
-        public Project Project { get; set; }
+        public Ticket Ticket { get; set; }
     }
 }

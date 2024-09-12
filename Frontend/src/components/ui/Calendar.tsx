@@ -27,7 +27,7 @@ const Calendar = () => {
       </div>
 
       {/* Days of the week header */}
-      <div className="grid grid-cols-7 gap-2 mb-2 text-center font-medium">
+      <div className="grid grid-cols-7 gap-2 mb-2 text-center text-sm font-medium">
         <div>Sun</div>
         <div>Mon</div>
         <div>Tue</div>
@@ -38,11 +38,11 @@ const Calendar = () => {
       </div>
 
       {/* Days grid */}
-      <div className="grid grid-cols-7 gap-2">
+      <div className="grid grid-cols-7 gap-2 text-sm">
         {daysInMonth.map((day) => (
           <div
             key={day}
-            className={`p-2 w-10 h-10 flex items-center justify-center rounded-full ${
+            className={`p-4 w-8 h-8 flex items-center justify-center rounded-full ${
               day === currentDay ? 'bg-blue-500 text-white font-bold' : 'bg-gray-200'
             }`}
           >

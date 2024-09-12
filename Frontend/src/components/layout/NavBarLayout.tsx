@@ -9,7 +9,7 @@ const NavBarLayout = () => {
         <div className="sticky top-0 left-0 z-50 min-w-fit">
             <NavBar/>
         </div>
-        <main className="w-full break-words p-4">
+        <main className="w-full break-words p-8">
             <Outlet/>
         </main>
     </div>

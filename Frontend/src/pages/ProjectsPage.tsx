@@ -89,22 +89,16 @@ const ProjectsPage = () => {
 
   return (
     <div>
-      {createProjectModal && <CreateProjectModal onClose={closeModal} displayToast={displayToast}/>}
-      
-      <div className="fixed bottom-4 right-4 z-50">
-        {showToast && <ToastSuccess message={message}/>}
-      </div>
 
       <Button
       onClick={openModal}
-      className="bg-customGreen hover:bg-buttonHover mt-2 mb-4">Create Project
+      className="bg-customGreen hover:bg-buttonHover mb-4">Create Project
       </Button>
 
     <div className="overflow-x-auto">
       <Table hoverable className="w-full">
         <Table.Head>
           <Table.HeadCell>Title</Table.HeadCell>
-          <Table.HeadCell>Description</Table.HeadCell>
           <Table.HeadCell>Status</Table.HeadCell>
           <Table.HeadCell>Created</Table.HeadCell>
           <Table.HeadCell>Start Date</Table.HeadCell>
@@ -113,21 +107,26 @@ const ProjectsPage = () => {
         </Table.Head>
         <Table.Body className="divide-y">
           {projects.slice().reverse().map((project) => (
-            <Table.Row onDoubleClick={() => handleProjectRowClick(project.id)} 
+            <Table.Row onClick={() => handleProjectRowClick(project.id)} 
             key={project.id} 
-            className="bg-white hover:bg-tableHover dark:border-gray-700 dark:bg-gray-800 whitespace-nowrap font-medium text-gray-900 dark:text-white">
-              <Table.Cell className="max-w-sm truncate">{project.title}</Table.Cell>
-              <Table.Cell className="max-w-sm truncate">{project.description}</Table.Cell>
-              <Table.Cell className="max-w-xs truncate">{project.status}</Table.Cell>
-              <Table.Cell className="max-w-sm truncate">{simplifyDateValue(project.created)}</Table.Cell>
+            className="bg-white hover:bg-tableHover hover:cursor-pointer dark:border-gray-700 dark:bg-gray-800 whitespace-nowrap font-medium text-gray-900 dark:text-white">
+              <Table.Cell className="max-w-2xs truncate">{project.title}</Table.Cell>
+              <Table.Cell className="max-w-2xs truncate">{project.status}</Table.Cell>
+              <Table.Cell className="max-w-xs truncate">{simplifyDateValue(project.created)}</Table.Cell>
               <Table.Cell className="max-w-xs truncate">{simplifyDateValue(project.startDate)}</Table.Cell>
               <Table.Cell className="max-w-xs truncate">{simplifyDateValue(project.endDate)}</Table.Cell>
-              <Table.Cell className="max-w-xs truncate"><a href="#" className=" text-blue-600 hover:underline dark:text-cyan-500">Edit</a></Table.Cell>
+              <Table.Cell className="max-w-2xs truncate"><a href="#" className=" text-link hover:underline dark:text-cyan-500">Edit</a></Table.Cell>
             </Table.Row>
           ))}
         </Table.Body>
       
       </Table>
+
+      {createProjectModal && <CreateProjectModal onClose={closeModal} displayToast={displayToast}/>}
+      
+      <div className="fixed bottom-4 right-4 z-50">
+        {showToast && <ToastSuccess message={message}/>}
+      </div>
     </div>
     </div>
   )

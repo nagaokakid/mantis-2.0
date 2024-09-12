@@ -67,21 +67,23 @@ namespace Backend.Controllers
         {
             try
             {
-                var newProject = newProjectInfo.Project;
-                string userId = newProjectInfo.UserId;
                 
-                if (newProject == null || userId == null)
+                if (newProjectInfo == null || 
+                    string.IsNullOrEmpty(newProjectInfo.UserId) || 
+                    newProjectInfo.Project == null)
                 {
-                    return BadRequest("Project and/or userId are undefined. Please check user context in client-side code.");
+                    return BadRequest("One or more is undefined: DTO, project, userId. Please check user context and api request in client-side code.");
                 }
 
-                string projectId = Guid.NewGuid().ToString();
+                var newProject = newProjectInfo.Project;
+                string userId = newProjectInfo.UserId;
 
+                string projectId = Guid.NewGuid().ToString();
                 newProject.Id = projectId;
-                /*newProject.StartDate = newProject.StartDate.ToUniversalTime();*/
-                var project = await _projectService.CreateProject(newProject);  // add to project table
+
+                var project = await _projectService.CreateProject(newProject);  // add project to db table
                 var projectDto = new ProjectDTO(project);
-                await _userProjectService.AddUserProject(userId, projectId); // add to user project table
+                await _userProjectService.AddUserProject(userId, projectId); // add user id and project id to db table
 
                 return CreatedAtAction(nameof(Post), projectDto);  // send DTO back to client
             }

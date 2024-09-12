@@ -102,6 +102,26 @@ export const CreateProjectRequest = async(newProjectInfo: DTO.CreateProjectInfo)
     }
 }
 
+export const CreateTicketRequest = async(newTicketInfo: DTO.CreateTicketInfo) =>
+    {
+        try 
+        {
+            const url = API_URL + "api/ticket/";
+            const response = await Ajax.post(url, newTicketInfo)
+    
+            if (!response.ok)
+            {
+                console.error(`Server responded with HTTP error: ${response.status}`)
+            }
+    
+            return response;
+        } 
+        catch (error: any) 
+        {
+            console.error("Create ticket attempt unsuccessful.", error);
+        }
+    }
+
 export const GetAllUserProjectsRequest = async(userId: string) =>
     {
         try 

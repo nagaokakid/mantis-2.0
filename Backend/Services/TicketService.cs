@@ -7,11 +7,13 @@ namespace Backend.Services
     {
         private readonly Repository<Ticket> _ticketRepo;
         private readonly Repository<Comment> _commentRepo;
+        private readonly AppDbContext _appDbContext;
 
         public TicketService(AppDbContext appDbContext)
         {
             _ticketRepo = new Repository<Ticket>(appDbContext);
             _commentRepo = new Repository<Comment>(appDbContext);
+            _appDbContext = appDbContext;
         }
 
         public IQueryable<Ticket> GetAllTickets()
@@ -33,6 +35,7 @@ namespace Backend.Services
 
         public async Task<Ticket> CreateTicket(Ticket newTicket)
         {
+            _appDbContext.Projects.Attach(newTicket.Project);
             return await _ticketRepo.Create(newTicket);
         }
 

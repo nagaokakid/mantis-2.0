@@ -19,7 +19,7 @@ namespace Backend.Controllers
             _userService = new UserService(appDbContext);
         }
 
-        // GET: api/userproject/GUID
+        // GET: api/userproject/userId
         [HttpGet("{userId}")]
         public async Task<ActionResult<List<ProjectDTO>>> Get(string userId)
         {

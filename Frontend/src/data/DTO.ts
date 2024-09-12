@@ -1,4 +1,5 @@
 import IProject from './Project'
+import ITicket from './Ticket'
 
 export interface UserLoginInfo
 {
@@ -28,4 +29,10 @@ export interface CreateProjectInfo
 {
     UserId: string | undefined,
     Project: IProject
+}
+
+export interface CreateTicketInfo
+{
+    UserId: string | undefined,
+    Ticket: ITicket
 }

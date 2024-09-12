@@ -79,7 +79,7 @@ const CreateProjectModal: React.FC<CreateProjectModalProps> = ({onClose, display
       size="md" 
       onClose={onClose} 
       popup={true}
-      className="bg-opacity-20">
+      className="bg-opacity-30">
 
         <Modal.Header />
 
@@ -128,7 +128,7 @@ const CreateProjectModal: React.FC<CreateProjectModalProps> = ({onClose, display
             </div>
             <div className="flex flex-row pt-4">
               <Button type="submit" onClick={handleSubmit} className="bg-customGreen hover:bg-buttonHover">Confirm</Button>
-              <Button onClick={onClose} className="ml-auto justify-end bg-gray-500 hover:bg-gray-400">Cancel</Button>
+              <Button onClick={onClose} className="ml-auto justify-end bg-gray-400 hover:bg-gray-500">Cancel</Button>
             </div>
             
             
