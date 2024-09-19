@@ -142,6 +142,27 @@ export const GetAllUserProjectsRequest = async(userId: string) =>
         }
     }
 
+export const GetAllUserTicketsRequest = async (userId: string) =>
+{
+    try 
+    {
+        const url = API_URL + "api/userticket/" + userId;
+        const response = await Ajax.get(url);
+
+        if (!response.ok)
+        {
+            console.error(`Server responded with HTTP error: ${response.status}`);
+        }
+
+        return response;
+
+    } 
+    catch (error: any) 
+    {
+        console.error("Get all user tickets attempt unsuccessful.", error);
+    }
+}
+
 export const GetProjectRequest = async (projectId: string) => {
     try 
     {
@@ -159,5 +180,25 @@ export const GetProjectRequest = async (projectId: string) => {
     catch (error: any) 
     {
         console.error("Get project attempt unsuccessful.", error);
+    }
+}
+
+export const GetUserBasicInfoRequest = async (userId: string) => {
+    try 
+    {
+        const url = API_URL + "api/user/basic/" + userId;
+        const response = await Ajax.get(url);
+
+        if (!response.ok)
+        {
+            console.error(`Server responded with HTTP error: ${response.status}`);
+        }
+
+        return response;
+
+    } 
+    catch (error: any) 
+    {
+        console.error("Get basic user info attempt unsuccessful.", error);
     }
 }

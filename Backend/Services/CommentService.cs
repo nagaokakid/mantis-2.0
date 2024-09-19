@@ -22,6 +22,14 @@ namespace Backend.Services
             return await _commentRepo.GetById(id);
         }
 
+        // Retrieve all comments belonging to a single user
+        public List<Comment> GetAllUserComments(string userId)
+        {
+            var commentTable = _commentRepo.GetAll();
+            var userComments = commentTable.Where(entry => entry.UserId == userId).ToList();
+            return userComments;
+        }
+
         public async Task<Comment> CreateComment(Comment newComment)
         {
             return await _commentRepo.Create(newComment);

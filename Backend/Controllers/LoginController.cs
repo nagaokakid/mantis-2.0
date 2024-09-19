@@ -13,15 +13,19 @@ namespace Backend.Controllers
     public class LoginController : ControllerBase
     {
         private readonly UserService _userService;
+        private readonly UserProjectService _userProjectService;
+        private readonly UserTicketService _userTicketService;
 
         public LoginController(AppDbContext context)
         {
             _userService = new UserService(context);
+            _userProjectService = new UserProjectService(context);
+            _userTicketService = new UserTicketService(context);
         }
 
         // POST api/login/
         [HttpPost]
-        public async Task<ActionResult> Post([FromBody] UserLoginInfo userLoginInfo)
+        public async Task<ActionResult<SuccessfulUserLoginInfo>> Post([FromBody] UserLoginInfo userLoginInfo)
         {
             try
             {
@@ -40,8 +44,10 @@ namespace Backend.Controllers
                 var hashPass = user.Password;
                 if (hashPass == userLoginInfo.Password)
                 {
-                    int projectCount = _userService.GetProjectCount(user.Id);
-                    int ticketCount = _userService.GetTicketCount(user.Id);
+                    int projectCount = _userProjectService.GetProjectCount(user.Id);
+                    int ticketCount = _userTicketService.GetTicketCount(user.Id);
+                    int projectsCompletedCount = _userProjectService.GetCompletedProjectCount(user.Id);
+                    int ticketsCompletedCount = _userTicketService.GetCompletedTicketCount(user.Id);
                     var successfulUserLoginInfo = new SuccessfulUserLoginInfo()
                     {
                         Id = user.Id,
@@ -49,7 +55,9 @@ namespace Backend.Controllers
                         LastName = user.LastName,
                         UserName = user.UserName,
                         ProjectCount = projectCount,
-                        TicketCount = ticketCount
+                        TicketCount = ticketCount,
+                        CompletedProjectCount = projectsCompletedCount,
+                        CompletedTicketCount = ticketsCompletedCount
                     };
                     return Ok(successfulUserLoginInfo);
                 }

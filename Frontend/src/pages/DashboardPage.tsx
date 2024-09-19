@@ -9,6 +9,8 @@ import { ToastSuccess } from "../components/ui/Toast"
 import { UseToast } from "../hooks/UseToast"
 import LoadingWheel from "../components/ui/LoadingWheel";
 import CreateTicketModal from "../components/ui/CreateTicketModal";
+import { GetUserBasicInfoRequest } from "../requests/ApiRequestHandler";
+import { UserBasicInfo } from "../data/DTO";
 
 const DashboardPage = () => {
   const userContext = useContext(UserContext);
@@ -16,6 +18,12 @@ const DashboardPage = () => {
   const [createProjectModal, setCreateProjectModal] = useState(false);
   const [createTicketModal, setCreateTicketModal] = useState(false);
   const {showToast, message, displayToast} = UseToast();
+
+  const fetchUserBasicInfo: (userId: string) => Promise<UserBasicInfo> = async (userId) => {
+    const response = await GetUserBasicInfoRequest(userId);
+    const userBasicInfo: UserBasicInfo = await response.json();
+    return userBasicInfo;
+  }
 
   const openProjectModal = () => {
     setCreateProjectModal(true);
@@ -41,7 +49,18 @@ const DashboardPage = () => {
     );
   }
 
-  const {user} = userContext;
+  const {user, setUser} = userContext;
+
+  useEffect(() => {
+    const updateUserBasicInfo = async () => {
+      if (user)
+        {
+          const userBasicInfo = await fetchUserBasicInfo(user.id);
+          setUser(userBasicInfo);
+        }
+    }
+    updateUserBasicInfo();
+  }, []);
 
   // Gather user details once context is made available
   const greeting: string = `Welcome${user?.firstName ? ", " + user.firstName + "!" : "! We're glad to have you here."}`;

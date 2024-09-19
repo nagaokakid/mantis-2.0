@@ -49,16 +49,16 @@ const LoginPage = () => {
       return;
     }
 
-    // if context is still undefined, just wait...
+    // if user context is still undefined, just wait...
     if (!userContext)
     {
       return (<LoadingWheel/>)
     }
 
     // login is successful at this point...
-    const userData: SuccessfulUserLoginInfo = await response.json();  // grab user info returned from server
-    const {setUser} = userContext;  // set f'n for user context
-    setUser(userData);
+    const userData: SuccessfulUserLoginInfo = await response.json();  // grab user data returned from server
+    const {setUser} = userContext;
+    setUser(userData);  // set user context to match received user data
     
     navigate("/home/dashboard");  // go to home page
   }

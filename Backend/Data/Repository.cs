@@ -1,5 +1,7 @@
 ﻿using Npgsql;
 using Backend.Exceptions;
+using Backend.Data.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Data
 {

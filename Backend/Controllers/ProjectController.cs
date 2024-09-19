@@ -14,13 +14,11 @@ namespace Backend.Controllers
     public class ProjectController : ControllerBase
     {
         private readonly ProjectService _projectService;
-        private readonly UserService _userService;
         private readonly UserProjectService _userProjectService;
 
         public ProjectController(AppDbContext context)
         {
             _projectService = new ProjectService(context);
-            _userService = new UserService(context);
             _userProjectService = new UserProjectService(context);
         }
 

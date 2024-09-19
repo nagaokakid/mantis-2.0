@@ -12,11 +12,11 @@ namespace Backend.Controllers
     [ApiController]
     public class UserProjectController : ControllerBase
     {
-        private readonly UserService _userService;
+        private readonly UserProjectService _userProjectService;
 
         public UserProjectController(AppDbContext appDbContext)
         {
-            _userService = new UserService(appDbContext);
+            _userProjectService = new UserProjectService(appDbContext);
         }
 
         // GET: api/userproject/userId
@@ -29,7 +29,7 @@ namespace Backend.Controllers
                 {
                     return BadRequest("UserId is empty, null, or contains only whitespaces.");
                 }
-                var projectList = await _userService.GetAllUserProjects(userId); // get all projects from db
+                var projectList = await _userProjectService.GetAllUserProjects(userId); // get all user projects from db
                 var projectDTOs = projectList.Select(project => new ProjectDTO(project)).ToList(); // convert to project DTOs
                 return Ok(projectDTOs);
             }

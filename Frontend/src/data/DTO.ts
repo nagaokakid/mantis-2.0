@@ -14,7 +14,21 @@ export interface SuccessfulUserLoginInfo
     lastName: string,
     userName: string,
     projectCount: number,
-    ticketCount: number
+    ticketCount: number,
+    completedProjectCount: number,
+    completedTicketCount: number
+}
+
+export interface UserBasicInfo 
+{
+    id: string,
+    firstName: string,
+    lastName: string,
+    userName: string,
+    projectCount: number,
+    ticketCount: number,
+    completedProjectCount: number,
+    completedTicketCount: number
 }
 
 export interface UserRegisterInfo

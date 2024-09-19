@@ -8,7 +8,11 @@ namespace Backend.Data.DTO
     {
         [Required]
         public string Id { get; set; }
-        
+
+/*        [Required]
+        public ProjectDTO Project { get; set; }*/
+
+        [Required]
         public string ProjectId { get; set; }
         
         [Required]
@@ -35,6 +39,7 @@ namespace Backend.Data.DTO
         public TicketDTO(Ticket ticket)
         {
             Id = ticket.Id;
+            /*Project = new ProjectDTO(ticket.Project);*/
             ProjectId = ticket.ProjectId;
             Title = ticket.Title;
             Description = ticket.Description;

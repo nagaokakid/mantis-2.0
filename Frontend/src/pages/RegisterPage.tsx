@@ -107,7 +107,7 @@ const RegisterPage = () => {
         <div className="modal-box">
           <form method="dialog"/>
           <h3 className="font-bold text-lg">Please wait</h3>
-          <p className="py-4">Creating your account now...</p>
+          <p className="py-4">Verifying your information...</p>
         </div>
       </div>)}
 
@@ -118,7 +118,7 @@ const RegisterPage = () => {
           <p className="pt-4">Please login with your newly registered account.</p>
           <div className="modal-action">
             <form method="dialog">
-              <button onClick={closeSuccessModal} className="bg-green-600 hover:bg-green-500 text-white text-md text-center w-1/8 py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+              <button onClick={closeSuccessModal} className="bg-customGreen hover:bg-buttonHover text-white text-md text-center w-1/8 py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                 <Link to="/login">Go to Login</Link>
               </button>
             </form>

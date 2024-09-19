@@ -8,6 +8,7 @@ import ProjectsPage from './pages/ProjectsPage';
 import { MenuItemProvider } from './contexts/MenuItemContext';
 import TicketsPage from './pages/TicketsPage';
 import ProjectDetailsPage from './pages/ProjectDetailsPage';
+import TicketDetailsPage from './pages/TicketDetailsPage';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
               <Route path="projects" element={<ProjectsPage/>}/>
               <Route path="projects/:projectId" element={<ProjectDetailsPage/>}/>
               <Route path="tickets" element={<TicketsPage/>}/>
+              <Route path="tickets/:ticketId" element={<TicketDetailsPage/>}/>
               <Route path="schedule"/>
               <Route path="profile"/>
               <Route path="settings"/>

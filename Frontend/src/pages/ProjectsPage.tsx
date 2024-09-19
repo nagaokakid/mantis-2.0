@@ -70,7 +70,7 @@ const ProjectsPage = () => {
       const user: SuccessfulUserLoginInfo = userContext.user;
       fetchProjects(user);
     }
-  }, [userContext])
+  }, [])
 
   // update user projects list every time a new project is created
   useEffect(() => {

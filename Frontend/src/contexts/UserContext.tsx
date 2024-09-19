@@ -1,10 +1,10 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { SuccessfulUserLoginInfo } from '../data/DTO';
+import { SuccessfulUserLoginInfo, UserBasicInfo } from '../data/DTO';
 
 // Define the context type
 interface UserContextProps {
   user: SuccessfulUserLoginInfo | null;
-  setUser: (user: SuccessfulUserLoginInfo | null) => void;
+  setUser: (user: SuccessfulUserLoginInfo | UserBasicInfo | null) => void;
 }
 
 export const UserContext = createContext<UserContextProps | undefined>(undefined);
@@ -16,7 +16,7 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
   useEffect(() => {
     const storedUser = localStorage.getItem('user');  // check if user info is already stored
     if (storedUser) {
-      setUser(JSON.parse(storedUser));  // if stored, change state variable to match local storage object
+      setUser(JSON.parse(storedUser));  // if already stored, change state variable to match local storage object
     }
   }, []);
 

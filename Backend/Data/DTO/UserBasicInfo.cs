@@ -1,7 +1,7 @@
 ﻿namespace Backend.Data.DTO
 {
-    // Outgoing DTO
-    public class SuccessfulUserLoginInfo
+    // Outgoing DTO (to frontend dashboard)
+    public class UserBasicInfo
     {
         public string Id { get; set; }
         public string FirstName { get; set; }

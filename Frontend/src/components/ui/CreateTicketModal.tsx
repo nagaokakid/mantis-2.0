@@ -71,15 +71,38 @@ const CreateTicketModal: React.FC<CreateTicketModalProps> = ({onClose, displayTo
     }));
   }
 
+  const updateTicketProject = (projectId: string) => {
+    const project = projects.find(project => project.id === projectId);
+
+    setFormData((prevData) => ({
+      ...prevData,
+      Ticket: {
+        ...prevData.Ticket,
+        projectId: projectId,
+        project: project
+      }
+    }));
+  }
+
   const handleSubmit = async (event: any) => {
     event.preventDefault();
     setIsTitleValid(true);
+
+    console.log(formData);
 
     // user must enter a project title
     if (!formData.Ticket.title || formData.Ticket.title.trim().length === 0)
     {
       setIsTitleValid(false);
       return;
+    }
+
+    // set Project properties to most recent project if nothing has been selected by user
+    if (!formData.Ticket.project || !formData.Ticket.projectId)
+    {
+      const recentProject = projects[projects.length-1];
+      formData.Ticket.project = recentProject;
+      formData.Ticket.projectId = recentProject.id;
     }
 
     // set created date to current time
@@ -149,7 +172,7 @@ const CreateTicketModal: React.FC<CreateTicketModalProps> = ({onClose, displayTo
                     <div className="mb-2 block">
                         <Label htmlFor="project" value="Project"/>
                     </div>
-                    <Select>
+                    <Select onChange={(event) => updateTicketProject(event.target.value)}>
                         {projects.slice().reverse().map((project) => (
                             <option title={project.title} value={project.id}>{project.title.substring(0,39)}</option>
                         ))}
